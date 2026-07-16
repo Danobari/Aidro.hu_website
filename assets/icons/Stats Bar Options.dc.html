@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<style>
+  body{margin:0;background:#f0eee9;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  .dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+  .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+  .dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+  .dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+  .dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+  .dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+  .dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+  .dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+  .dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+  .dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+  .dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+
+  /* glyph frame language shared across all variants */
+  .g-frame{border:1.5px solid var(--ac);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(79,195,232,.06)}
+  .g-target{position:relative;width:16px;height:16px;border:1.5px solid var(--ac);border-radius:50%}
+  .g-target::after{content:"";position:absolute;inset:4px;border:1.5px solid var(--ac);border-radius:50%}
+  .g-calendar{position:relative;width:16px;height:14px;border:1.5px solid var(--ac);border-radius:2px}
+  .g-calendar::before{content:"";position:absolute;left:3px;top:5px;width:3px;height:3px;background:var(--ac);border-radius:1px}
+  .g-calendar::after{content:"";position:absolute;right:3px;top:5px;width:3px;height:3px;background:var(--ac);border-radius:1px}
+  .g-layers{position:relative;width:16px;height:14px}
+  .g-layers::before{content:"";position:absolute;left:0;top:0;width:16px;height:3px;border:1.5px solid var(--ac);border-radius:1px}
+  .g-layers::after{content:"";position:absolute;left:0;bottom:0;width:16px;height:3px;border:1.5px solid var(--ac);border-radius:1px;opacity:.55}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Opciones para la franja de stats (iconos tipo marco/cuadro)</span></div>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Refinado &mdash; iconos a la derecha, con divisores</div>
+      <div class="dv-card" style="width:760px;background:#080b10;--ac:#4fc3e8">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+          <div style="padding:28px 26px;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.08)">
+            <div>
+              <div style="color:#4fc3e8;font-size:26px;font-weight:700;font-family:Georgia,serif">+95%</div>
+              <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">extraction accuracy</div>
+            </div>
+            <div class="g-frame" style="width:38px;height:38px"><div class="g-target"></div></div>
+          </div>
+          <div style="padding:28px 26px;display:flex;align-items:center;justify-content:space-between;border-right:1px solid rgba(255,255,255,.08)">
+            <div>
+              <div style="color:#4fc3e8;font-size:26px;font-weight:700;font-family:Georgia,serif">4-6 weeks</div>
+              <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">typical delivery</div>
+            </div>
+            <div class="g-frame" style="width:38px;height:38px"><div class="g-calendar"></div></div>
+          </div>
+          <div style="padding:28px 26px;display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="color:#4fc3e8;font-size:26px;font-weight:700;font-family:Georgia,serif">6</div>
+              <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">services in the catalog</div>
+            </div>
+            <div class="g-frame" style="width:38px;height:38px"><div class="g-layers"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Icono a la izquierda, en l&iacute;nea, m&aacute;s aire</div>
+      <div class="dv-card" style="width:760px;background:#080b10;--ac:#4fc3e8">
+        <div style="display:flex;justify-content:space-between;padding:34px 40px;gap:24px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div class="g-frame" style="width:44px;height:44px"><div class="g-target"></div></div>
+            <div>
+              <div style="color:#4fc3e8;font-size:24px;font-weight:700;font-family:Georgia,serif">+95%</div>
+              <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:3px">extraction accuracy</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div class="g-frame" style="width:44px;height:44px"><div class="g-calendar"></div></div>
+            <div>
+              <div style="color:#4fc3e8;font-size:24px;font-weight:700;font-family:Georgia,serif">4-6 weeks</div>
+              <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:3px">typical delivery</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div class="g-frame" style="width:44px;height:44px"><div class="g-layers"></div></div>
+            <div>
+              <div style="color:#4fc3e8;font-size:24px;font-weight:700;font-family:Georgia,serif">6</div>
+              <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:3px">services in the catalog</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Tarjetas independientes, borde sutil</div>
+      <div class="dv-card" style="width:760px;background:#080b10;--ac:#4fc3e8;padding:28px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div style="border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:22px">
+            <div class="g-frame" style="width:36px;height:36px;margin-bottom:16px"><div class="g-target"></div></div>
+            <div style="color:#4fc3e8;font-size:24px;font-weight:700;font-family:Georgia,serif">+95%</div>
+            <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">extraction accuracy</div>
+          </div>
+          <div style="border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:22px">
+            <div class="g-frame" style="width:36px;height:36px;margin-bottom:16px"><div class="g-calendar"></div></div>
+            <div style="color:#4fc3e8;font-size:24px;font-weight:700;font-family:Georgia,serif">4-6 weeks</div>
+            <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">typical delivery</div>
+          </div>
+          <div style="border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:22px">
+            <div class="g-frame" style="width:36px;height:36px;margin-bottom:16px"><div class="g-layers"></div></div>
+            <div style="color:#4fc3e8;font-size:24px;font-weight:700;font-family:Georgia,serif">6</div>
+            <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:4px">services in the catalog</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1d">
+      <div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Fila compacta, estilo dashboard t&eacute;cnico</div>
+      <div class="dv-card" style="width:760px;background:#080b10;--ac:#4fc3e8">
+        <div style="display:flex;align-items:center;padding:18px 30px;gap:0">
+          <div style="display:flex;align-items:center;gap:10px;flex:1">
+            <div class="g-frame" style="width:26px;height:26px;border-radius:6px"><div class="g-target" style="width:12px;height:12px"></div></div>
+            <div style="color:#4fc3e8;font-size:16px;font-weight:700;font-family:ui-monospace,Menlo,monospace">+95%</div>
+            <div style="color:rgba(255,255,255,.4);font-size:10px;letter-spacing:.04em;text-transform:uppercase">accuracy</div>
+          </div>
+          <div style="width:1px;height:20px;background:rgba(255,255,255,.15);margin:0 20px"></div>
+          <div style="display:flex;align-items:center;gap:10px;flex:1">
+            <div class="g-frame" style="width:26px;height:26px;border-radius:6px"><div class="g-calendar" style="width:12px;height:11px"></div></div>
+            <div style="color:#4fc3e8;font-size:16px;font-weight:700;font-family:ui-monospace,Menlo,monospace">4-6 wks</div>
+            <div style="color:rgba(255,255,255,.4);font-size:10px;letter-spacing:.04em;text-transform:uppercase">delivery</div>
+          </div>
+          <div style="width:1px;height:20px;background:rgba(255,255,255,.15);margin:0 20px"></div>
+          <div style="display:flex;align-items:center;gap:10px;flex:1">
+            <div class="g-frame" style="width:26px;height:26px;border-radius:6px"><div class="g-layers" style="width:12px;height:11px"></div></div>
+            <div style="color:#4fc3e8;font-size:16px;font-weight:700;font-family:ui-monospace,Menlo,monospace">6</div>
+            <div style="color:rgba(255,255,255,.4);font-size:10px;letter-spacing:.04em;text-transform:uppercase">services</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Prueba: "m&aacute;s como <a class="dv-oid" href="#1c">1c</a> pero con divisores de <a class="dv-oid" href="#1a">1a</a>" &middot; "hazlo full-bleed" &middot; "cambia los n&uacute;meros/textos a &hellip;"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

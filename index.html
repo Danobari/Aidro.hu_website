@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aidro — AI consulting in Budapest</title>
+<meta name="description" content="Aidro: custom AI agents, back-office automation and financial copilot for companies in Budapest. Results in weeks, not quarters.">
+<link rel="icon" type="image/png" href="assets/logo/aidro-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#000000;
+    --panel:#0a0a0a;
+    --panel-2:#0d0d0d;
+    --border:#1c1c1c;
+    --bondi:#0095B6;
+    --bondi-bright:#38DFFF;
+    --cobalt:#2461FF;
+    --bondi-dark:#04222b;
+    --white:#F5F7FA;
+    --muted:#a3a3a3;
+    --muted-2:#8a8a8a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-snap-type:y mandatory; scroll-behavior:smooth;}
+  body{margin:0; color:var(--white); font-family:'Space Grotesk',sans-serif; -webkit-font-smoothing:antialiased; background:#000;}
+  .snap-section{scroll-snap-align:start; scroll-snap-stop:always;}
+  .section-bg{
+    position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0;
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    transform:scale(1.08) translate(0,0);
+    transition:transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    will-change:transform;
+  }
+  .section-bg.neural{
+    background-image:url('assets/images/bg-neural-network.webp');
+    -webkit-mask-image:linear-gradient(to bottom, transparent, black 5%, black 85%, transparent);
+    mask-image:linear-gradient(to bottom, transparent, black 5%, black 85%, transparent);
+    opacity:0.55;
+  }
+  .section-bg.wave{
+    background-image:url('assets/images/about-wave-flow.webp');
+    -webkit-mask-image:linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+    mask-image:linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+    opacity:0.75;
+  }
+  .serif{font-family:'Source Serif 4',serif;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{width:100%; max-width:1320px; margin:0 auto; padding:0 28px; box-sizing:border-box;}
+  [data-i18n]{display:inline;}
+  html[data-lang="en"] .lang-hu{display:none;}
+  html[data-lang="hu"] .lang-en{display:none;}
+
+  /* nav */
+  nav{position:sticky; top:0; z-index:50; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); border-bottom:1px solid var(--border);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:18px 28px; max-width:1320px; margin:0 auto;}
+  .logo img{height:30px; display:block; filter:drop-shadow(0 0 6px rgba(56,223,255,0.4)); transition:filter 0.25s ease;}
+  .logo:hover img{filter:drop-shadow(0 0 10px rgba(56,223,255,0.85)) drop-shadow(0 0 24px rgba(0,149,182,0.55));}
+  .nav-links{display:flex; gap:28px; font-size:14px; color:#c3c9d6;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .lang-toggle{display:flex; border:1px solid var(--border); border-radius:7px; font-size:12px;}
+  .lang-toggle button{position:relative; background:none; border:none; color:var(--muted); font-family:inherit; padding:6px 10px; cursor:pointer; font-size:12px; transition:box-shadow 0.25s ease;}
+  .lang-toggle button:first-child{border-radius:6px 0 0 6px;}
+  .lang-toggle button:last-child{border-radius:0 6px 6px 0;}
+  .lang-toggle button.active{background:var(--bondi); color:var(--bondi-dark); font-weight:700; z-index:1; box-shadow:0 0 10px rgba(56,223,255,0.7), 0 0 22px rgba(0,149,182,0.5);}
+  .btn-primary{background:linear-gradient(135deg, #4FD8FF 0%, var(--bondi) 75%); color:#F5F7FA; font-weight:700; padding:10px 18px; border-radius:8px; font-size:13px; border:none; cursor:pointer; font-family:inherit; transition:box-shadow 0.2s ease, transform 0.2s ease; box-shadow:0 0 0 1px rgba(79,216,255,0.15);}
+  .btn-primary:hover{box-shadow:0 0 18px rgba(0,149,182,0.65), 0 0 38px rgba(79,216,255,0.35); transform:translateY(-1px);}
+  .btn-secondary{border:1px solid #2a2a2a; color:var(--white); font-weight:500; padding:11px 20px; border-radius:8px; font-size:14px; background:none; cursor:pointer; font-family:inherit;}
+  @media(max-width:800px){ .nav-links{display:none;} }
+
+  /* hero */
+  .hero-screen{display:flex; flex-direction:column; min-height:100vh;}
+  .hero{padding:64px 0 76px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:center; flex:1; box-sizing:border-box;}
+  .hero-bg{position:absolute; inset:0; z-index:0; background-image:url('assets/images/hero-bg.webp'); background-size:145% auto; background-position:30% center; background-repeat:no-repeat; transform:scale(1) translate(0,0); transition:transform 0.5s cubic-bezier(0.22,1,0.36,1); will-change:transform;}
+  .hero-bg::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 42%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0.35) 100%), linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.55) 100%);}
+  .hero-inner{width:100%; max-width:1320px; margin:0 auto; padding:0 28px; position:relative; z-index:1; display:flex; align-items:flex-start; justify-content:space-between; gap:40px; padding-top:20px; box-sizing:border-box;}
+  .hero-text{flex:1; min-width:0; max-width:560px;}
+  .badge{display:inline-block; font-size:13px; font-weight:700; letter-spacing:0.02em; color:var(--bondi-bright); text-shadow:0 0 12px rgba(56,223,255,0.35); margin-bottom:22px;}
+  h1{font-size:46px; line-height:1.14; font-weight:700; margin:0 0 20px; letter-spacing:-0.01em; max-width:600px;}
+  .hl-cyan{color:var(--bondi);}
+  .hero-sub{font-size:17px; line-height:1.65; color:var(--muted); margin:0 0 30px; max-width:520px;}
+  .hero-ctas{display:flex; gap:14px; margin-bottom:8px; flex-wrap:wrap;}
+  .stats{position:relative; z-index:1; display:grid; grid-template-columns:repeat(3,1fr); background:#050505; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .stat{padding:24px 28px; display:flex; align-items:center; justify-content:space-between; gap:16px; border-right:1px solid rgba(0,149,182,0.16);}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-size:26px; font-weight:700; color:var(--bondi);}
+  .stat-label{font-size:12px; color:var(--muted-2); margin-top:6px;}
+  .stat-wave{flex-shrink:0; opacity:0.85;}
+  .stat-icon-frame{width:44px; height:44px; border:1.5px solid var(--bondi-bright); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:rgba(56,223,255,0.07);}
+  .g-target{position:relative; width:16px; height:16px; border:1.5px solid var(--bondi-bright); border-radius:50%;}
+  .g-target::after{content:""; position:absolute; inset:4px; border:1.5px solid var(--bondi-bright); border-radius:50%;}
+  .g-calendar{position:relative; width:16px; height:14px; border:1.5px solid var(--bondi-bright); border-radius:2px;}
+  .g-calendar::before{content:""; position:absolute; left:3px; top:5px; width:3px; height:3px; background:var(--bondi-bright); border-radius:1px;}
+  .g-calendar::after{content:""; position:absolute; right:3px; top:5px; width:3px; height:3px; background:var(--bondi-bright); border-radius:1px;}
+  .g-layers{position:relative; width:16px; height:14px;}
+  .g-layers::before{content:""; position:absolute; left:0; top:0; width:16px; height:3px; border:1.5px solid var(--bondi-bright); border-radius:1px;}
+  .g-layers::after{content:""; position:absolute; left:0; bottom:0; width:16px; height:3px; border:1.5px solid var(--bondi-bright); border-radius:1px; opacity:.55;}
+  @media(max-width:700px){ .stats{grid-template-columns:1fr;} .stat{border-right:none; border-bottom:1px solid rgba(0,149,182,0.16);} .stat:last-child{border-bottom:none;} }
+
+  @media(max-width:1050px){
+    .hero-inner{flex-direction:column; align-items:stretch;}
+    .hero-text{max-width:none;}
+  }
+
+
+  /* section generic */
+  section{padding:88px 28px;}
+  .section-head{max-width:600px; margin:0 0 48px;}
+  .eyebrow{font-size:12px; color:var(--bondi); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; font-weight:700;}
+  h2{font-size:32px; font-weight:700; margin:0 0 14px; letter-spacing:-0.01em;}
+  .section-sub{font-size:16px; color:var(--muted); line-height:1.6; margin:0;}
+  #services .section-head{position:relative; z-index:1; max-width:1000px; margin-bottom:30px;}
+  #services .section-head h2{font-size:clamp(32px,4vw,46px); font-weight:800; letter-spacing:-0.02em; line-height:1.08; white-space:nowrap;}
+  #services .section-sub{font-size:16px; line-height:1.6; max-width:540px;}
+  @media(max-width:900px){ #services .section-head h2{white-space:normal;} }
+  .section-glow{position:absolute; top:-12%; left:-8%; width:60%; height:75%; background:radial-gradient(circle at 30% 30%, rgba(0,149,182,0.38), transparent 70%); pointer-events:none; z-index:0; filter:blur(50px);}
+
+  /* services */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media(max-width:900px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:640px){ .services-grid{grid-template-columns:1fr;} }
+  .svc-card{
+    background:rgba(255,255,255,0.035);
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    border:1px solid rgba(0,149,182,0.16); border-radius:14px; padding:20px 20px;
+    display:flex; flex-direction:column;
+    transition:border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  }
+  .svc-card:hover{border-color:rgba(0,149,182,0.4); background:rgba(255,255,255,0.05); transform:translateY(-3px);}
+  .svc-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .svc-badge{width:38px; height:38px; display:block; border-radius:10px; transition:transform 0.25s ease, box-shadow 0.25s ease;}
+  .svc-card:hover .svc-badge{transform:translateY(-2px); box-shadow:0 0 14px rgba(56,223,255,0.6), 0 0 30px rgba(0,149,182,0.4);}
+  .svc-num{font-size:12px; color:var(--muted-2);}
+  .svc-title{font-size:18px; font-weight:700; margin:0 0 7px;}
+  .svc-desc{font-size:13.5px; color:var(--muted); line-height:1.5; margin:0 0 12px; flex-grow:1;}
+  .svc-duration{font-size:12px; color:var(--bondi); margin-bottom:14px;}
+  .svc-btn{
+    background:linear-gradient(135deg, #4FD8FF 0%, var(--bondi) 75%); color:#F5F7FA; font-weight:700;
+    padding:10px 16px; border-radius:8px; font-size:13px; border:none; cursor:pointer; font-family:inherit;
+    text-align:center; width:100%; transition:box-shadow 0.2s ease, transform 0.2s ease; box-shadow:0 0 0 1px rgba(79,216,255,0.15);
+  }
+  .svc-btn:hover{box-shadow:0 0 18px rgba(0,149,182,0.65), 0 0 38px rgba(79,216,255,0.35); transform:translateY(-1px);}
+
+  /* how we work */
+  #how-we-work .section-head{max-width:750px;}
+  #how-we-work .section-head h2{font-size:clamp(32px,4vw,46px); font-weight:800; letter-spacing:-0.02em; line-height:1.08; white-space:nowrap;}
+  @media(max-width:900px){ #how-we-work .section-head h2{white-space:normal;} }
+
+  .steps{position:relative; display:grid; grid-template-columns:repeat(4,220px); justify-content:center; gap:32px; width:100%; margin:52px auto 0; padding-top:8px;}
+  .step{position:relative;}
+  .step-orb{
+    position:relative; z-index:2; width:56px; height:56px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(0,149,182,0.22), rgba(0,149,182,0.04) 70%);
+    border:1px solid rgba(0,149,182,0.28);
+    box-shadow:0 0 18px rgba(0,149,182,0.3), inset 0 0 8px rgba(0,149,182,0.15);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; font-weight:700; color:var(--white); margin-bottom:20px;
+  }
+  .step-orb::before{
+    content:""; position:absolute; inset:-1px; border-radius:50%;
+    background:conic-gradient(from -90deg, rgba(0,149,182,0.95) 0deg, rgba(0,149,182,0.95) 78deg, transparent 78deg, transparent 360deg);
+    -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px));
+    mask:radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px));
+    filter:drop-shadow(0 0 4px rgba(0,149,182,0.75));
+  }
+  .step-connector{
+    position:absolute; top:27px; left:68px; right:-22px; height:1px; z-index:1;
+    background:linear-gradient(90deg, rgba(0,149,182,0.55), rgba(0,149,182,0.55) 42%, transparent 42%, transparent 58%, rgba(0,149,182,0.55) 58%);
+    box-shadow:0 0 6px rgba(0,149,182,0.35);
+  }
+  .step-connector::after{
+    content:''; position:absolute; top:50%; left:50%;
+    width:6px; height:6px;
+    border-top:1.5px solid var(--bondi); border-right:1.5px solid var(--bondi);
+    transform:translate(-50%,-50%) rotate(45deg);
+    filter:drop-shadow(0 0 3px rgba(0,149,182,0.85));
+  }
+  .step-title{font-size:16px; font-weight:700; margin:0 0 6px; color:var(--white);}
+  .step-desc{font-size:13.5px; color:var(--bondi); line-height:1.5;}
+
+  @media(max-width:900px){
+    .steps{grid-template-columns:repeat(2,1fr); gap:36px 28px; max-width:520px;}
+    .step-connector{display:none;}
+  }
+  @media(max-width:480px){
+    .steps{grid-template-columns:1fr; gap:30px; max-width:300px;}
+  }
+
+  /* about */
+  #about .section-head{max-width:750px; margin-bottom:20px;}
+  #about .section-head h2{font-size:clamp(32px,4vw,46px); font-weight:800; letter-spacing:-0.02em; line-height:1.08; white-space:nowrap;}
+  @media(max-width:900px){ #about .section-head h2{white-space:normal;} }
+  .about-box{
+    background:rgba(255,255,255,0.035);
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    border:1px solid rgba(0,149,182,0.16); border-left:4px solid var(--bondi);
+    border-top-left-radius:0; border-bottom-left-radius:0; border-radius:14px; padding:40px; max-width:760px;
+    box-shadow:-4px 0 20px rgba(0,149,182,0.12);
+  }
+  .about-box p{font-size:17px; line-height:1.7; color:var(--white); margin:0;}
+
+  /* final cta */
+  .final-cta{text-align:center;}
+  .final-cta h2{font-size:34px; max-width:520px; margin:-20px auto 64px; transform-origin:50% 100%; will-change:transform, opacity;}
+
+  /* footer */
+  footer{border-top:1px solid var(--border); padding:40px 28px;}
+  .footer-inner{max-width:1120px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;}
+  .footer-links{display:flex; gap:20px; font-size:13px; color:var(--muted);}
+  .footer-links a:hover{color:var(--bondi);}
+  .copyright{font-size:12px; color:#5a5a5a;}
+
+  /* ══ SERVICE DETAIL MODALS ══ */
+  .service-modal-overlay{display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.82); backdrop-filter:blur(3px); align-items:center; justify-content:center; padding:16px;}
+  .service-modal-overlay.open{display:flex;}
+  .service-modal{position:relative; width:min(720px,96vw); max-height:88vh; background:linear-gradient(160deg,#0b0e12 0%,#050505 100%); border:1px solid rgba(0,149,182,0.28); border-radius:18px; overflow:hidden; box-shadow:0 0 80px rgba(0,149,182,0.15), 0 40px 80px rgba(0,0,0,0.65); display:flex; flex-direction:column;}
+  .service-modal::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent, var(--bondi-bright) 30%, var(--bondi) 70%, transparent); z-index:2;}
+  .svc-modal-visual{position:relative; width:100%; height:150px; overflow:hidden; flex-shrink:0;}
+  .svc-modal-visual img{width:100%; height:100%; object-fit:cover; display:block;}
+  .svc-modal-visual::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(5,5,5,0) 0%, rgba(5,5,5,0.5) 65%, #0b0e12 100%);}
+  .service-modal-header{display:flex; align-items:center; justify-content:space-between; padding:16px 26px; border-bottom:1px solid rgba(0,149,182,0.14); background:rgba(0,0,0,0.4); flex-shrink:0;}
+  .svc-modal-badge{display:flex; align-items:center; gap:10px; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--bondi-bright);}
+  .svc-modal-badge img{height:24px; width:auto;}
+  .service-modal-close, .agent-modal-close{width:34px; height:34px; border-radius:50%; border:1px solid rgba(0,149,182,0.25); background:transparent; color:var(--muted); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; flex-shrink:0;}
+  .service-modal-close:hover, .agent-modal-close:hover{border-color:var(--bondi); color:var(--bondi); box-shadow:0 0 12px rgba(0,149,182,0.35);}
+  .service-modal-body{flex:1; overflow-y:auto; padding:26px 26px 0;}
+  .service-modal-body::-webkit-scrollbar{width:4px;}
+  .service-modal-body::-webkit-scrollbar-thumb{background:rgba(0,149,182,0.3); border-radius:2px;}
+  .svc-headline{font-size:clamp(21px,3vw,28px); font-weight:700; line-height:1.2; margin:0 0 10px; letter-spacing:-0.01em;}
+  .svc-subheadline{font-size:14px; color:var(--bondi); font-weight:600; margin:0 0 16px; line-height:1.5;}
+  .svc-desc{font-size:14.5px; color:var(--muted); line-height:1.7; margin:0 0 22px; padding-bottom:20px; border-bottom:1px solid rgba(0,149,182,0.12);}
+  .svc-section-label{font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(0,149,182,0.75); margin-bottom:10px; display:block;}
+  .svc-bullets{list-style:none; display:flex; flex-direction:column; gap:7px; margin:0 0 20px; padding:0 0 20px; border-bottom:1px solid rgba(0,149,182,0.12);}
+  .svc-bullets li{display:flex; align-items:flex-start; gap:9px; font-size:14.5px; color:var(--muted); line-height:1.5;}
+  .svc-bullets li::before{content:''; width:0; height:0; border-style:solid; border-width:4.5px 0 4.5px 7px; border-color:transparent transparent transparent var(--bondi); flex-shrink:0; margin-top:5px;}
+  .svc-deliverables{list-style:none; display:flex; flex-direction:column; gap:0; margin:0 0 20px; padding:0 0 20px; border-bottom:1px solid rgba(0,149,182,0.12);}
+  .svc-deliverables li{display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:var(--muted); line-height:1.5; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.04);}
+  .svc-deliverables li:last-child{border-bottom:none;}
+  .svc-deliverables li::before{content:'✓'; color:var(--bondi); font-size:11px; font-weight:700; flex-shrink:0; margin-top:2px;}
+  .svc-stats-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:24px;}
+  .svc-stat{background:rgba(0,149,182,0.05); border:1px solid rgba(0,149,182,0.14); border-radius:10px; padding:12px 14px;}
+  .svc-stat-key{font-size:10.5px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(0,149,182,0.7); margin-bottom:5px; display:block;}
+  .svc-stat-val{font-size:14.5px; color:var(--white); line-height:1.45;}
+  .service-modal-footer{padding:18px 26px; border-top:1px solid rgba(0,149,182,0.14); background:rgba(0,0,0,0.4); flex-shrink:0;}
+  .svc-cta-primary{display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 24px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; border:none; width:100%; font-family:inherit; background:linear-gradient(135deg, #4FD8FF 0%, var(--bondi) 75%); color:#F5F7FA; box-shadow:0 0 0 1px rgba(79,216,255,0.15); transition:box-shadow 0.2s ease, transform 0.2s ease;}
+  .svc-cta-primary:hover{box-shadow:0 0 18px rgba(0,149,182,0.65), 0 0 38px rgba(79,216,255,0.35); transform:translateY(-1px);}
+  .svc-more-link{display:block; width:100%; background:none; border:none; margin-top:12px; padding:4px; font-family:inherit; font-size:11.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-align:center; color:var(--muted-2); cursor:pointer; transition:color 0.2s ease;}
+  .svc-more-link:hover{color:var(--bondi-bright);}
+  .svc-topic-list{list-style:none; display:flex; flex-direction:column; gap:14px; margin:0 0 20px; padding:0 0 20px; border-bottom:1px solid rgba(0,149,182,0.12);}
+  .svc-topic-list li{position:relative; padding-left:16px;}
+  .svc-topic-list li::before{content:''; position:absolute; left:0; top:6px; width:0; height:0; border-style:solid; border-width:4.5px 0 4.5px 7px; border-color:transparent transparent transparent var(--bondi);}
+  .svc-topic-title{display:block; font-size:14.5px; font-weight:700; color:var(--white); margin-bottom:3px;}
+  .svc-topic-desc{display:block; font-size:13px; color:var(--muted); line-height:1.5;}
+  @media(max-width:640px){ .service-modal-body{padding:20px 18px 0;} .service-modal-header,.service-modal-footer{padding:14px 18px;} .svc-stats-grid{grid-template-columns:1fr;} }
+
+  /* ══ AGENT (PICKAXE) MODAL ══ */
+  .agent-modal-overlay{display:none; position:fixed; inset:0; z-index:210; background:rgba(0,0,0,0.86); backdrop-filter:blur(3px); align-items:center; justify-content:center; padding:16px;}
+  .agent-modal-overlay.open{display:flex;}
+  .agent-modal{position:relative; width:min(640px,95vw); height:min(600px,85vh); background:#050505; border:1px solid rgba(0,149,182,0.25); border-radius:18px; overflow:hidden; box-shadow:0 0 80px rgba(0,149,182,0.18), 0 40px 80px rgba(0,0,0,0.6); display:flex; flex-direction:column;}
+  .agent-modal-header{display:flex; align-items:center; justify-content:space-between; padding:16px 22px; border-bottom:1px solid rgba(0,149,182,0.14); flex-shrink:0;}
+  .agent-modal-title{font-size:16px; font-weight:700; color:var(--bondi-bright); display:flex; align-items:center; gap:8px;}
+  .agent-modal-title img{height:22px; width:auto;}
+  .agent-modal-consent{padding:9px 20px; font-size:12px; line-height:1.5; color:var(--muted); background:rgba(0,149,182,0.05); border-bottom:1px solid rgba(0,149,182,0.12); text-align:center; flex-shrink:0;}
+  .agent-modal-body{flex:1; overflow:hidden; position:relative; min-height:0; display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;}
+  .agent-modal-body p{font-size:13px; color:var(--muted); line-height:1.6; margin:0;}
+  .agent-modal-body > div[id^="deployment-"]{position:absolute; inset:0; width:100%; height:100%;}
+  .agent-modal-body iframe{position:absolute; inset:0; width:100%; height:100%; border:none; display:block;}
+</style>
+</head>
+<body>
+
+<div class="hero-screen snap-section">
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><img src="assets/logo/aidro-logo-horizontal.svg" alt="Aidro"></div>
+    <div class="nav-links">
+      <a href="#services"><span class="lang-en">Services</span><span class="lang-hu">Szolgáltatások</span></a>
+      <a href="#how-we-work"><span class="lang-en">How we work</span><span class="lang-hu">Hogyan dolgozunk</span></a>
+      <a href="#about"><span class="lang-en">About</span><span class="lang-hu">Rólunk</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-hu" onclick="setLang('hu')">HU</button>
+      </div>
+      <a href="#" class="btn-primary" onclick="openAgentModal('agent-modal-general');return false;"><span class="lang-en">Start My Free AI Diagnostic →</span><span class="lang-hu">Kérem az ingyenes AI-diagnosztikát →</span></a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge"><span class="lang-en">AI consulting in Budapest</span><span class="lang-hu">AI-tanácsadás Budapesten</span></div>
+      <h1>
+        <span class="lang-en">Skip the Theory: Get the <span class="hl-cyan">Results</span>.</span>
+        <span class="lang-hu">Kevesebb elmélet. Több <span class="hl-cyan">eredmény</span>.</span>
+      </h1>
+      <p class="hero-sub serif">
+        <span class="lang-en">Real automation for back-office, finance, and operations — <span class="hl-cyan">live in 4-6 weeks</span>.</span>
+        <span class="lang-hu">Valódi automatizálás back-office, pénzügy és üzemeltetés csapatoknak — <span class="hl-cyan">4-6 héten belül élesben</span>.</span>
+      </p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary" style="padding:13px 24px; font-size:14px;" onclick="openAgentModal('agent-modal-general');return false;"><span class="lang-en">Start My Free AI Diagnostic →</span><span class="lang-hu">Kérem az ingyenes AI-diagnosztikát →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+    <div class="stat">
+      <div><div class="stat-num">+95%</div><div class="stat-label"><span class="lang-en">extraction accuracy</span><span class="lang-hu">kinyerési pontosság</span></div></div>
+      <div class="stat-icon-frame"><div class="g-target"></div></div>
+    </div>
+    <div class="stat">
+      <div><div class="stat-num"><span class="lang-en">4-6 weeks</span><span class="lang-hu">4-6 hét</span></div><div class="stat-label"><span class="lang-en">typical delivery</span><span class="lang-hu">jellemző átfutási idő</span></div></div>
+      <div class="stat-icon-frame"><div class="g-calendar"></div></div>
+    </div>
+    <div class="stat">
+      <div><div class="stat-num">6</div><div class="stat-label"><span class="lang-en">services in the catalog</span><span class="lang-hu">szolgáltatás a kínálatban</span></div></div>
+      <div class="stat-icon-frame"><div class="g-layers"></div></div>
+    </div>
+  </div>
+</div>
+
+<section id="services" class="snap-section" style="position:relative; overflow:hidden; min-height:100vh; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; padding-top:8px; padding-bottom:36px;">
+  <div class="section-bg neural"></div>
+  <div class="section-glow"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div class="section-head">
+      <div class="eyebrow"><span class="lang-en">Services</span><span class="lang-hu">Szolgáltatások</span></div>
+      <h2><span class="lang-en">Six AI Services. Real Results.</span><span class="lang-hu">Hat AI-szolgáltatás. Valódi eredmény.</span></h2>
+      <p class="section-sub"><span class="lang-en">You get a working result — not a slide deck.</span><span class="lang-hu">Egy működő eredményt kapsz — nem egy prezentációt.</span></p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <div class="svc-top">
+          <img class="svc-badge" src="assets/icons/icons-3a-soft-blue/01-ai-training-for-your-team.svg" alt="" width="52" height="52">
+        </div>
+        <h3 class="svc-title"><span class="lang-en">AI training for your team</span><span class="lang-hu">AI-képzés a csapatodnak</span></h3>
+        <p class="svc-desc"><span class="lang-en">Practical AI training, organized by department. No generic slides.</span><span class="lang-hu">Gyakorlati AI-képzés, terület szerint szervezve. Nem sablon diák.</span></p>
+        <div class="svc-duration"><span class="lang-en">1-day intensive to 8-week program</span><span class="lang-hu">1 napos intenzív vagy 8 hetes program</span></div>
+        <button class="svc-btn" onclick="openServiceModal('svc-modal-1')"><span class="lang-en">Train My Team →</span><span class="lang-hu">Képezzük a csapatomat →</span></button>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-top">
+          <img class="svc-badge" src="assets/icons/icons-3a-soft-blue/02-custom-ai-agents.svg" alt="" width="52" height="52">
+        </div>
+        <h3 class="svc-title"><span class="lang-en">Custom AI agents</span><span class="lang-hu">Egyedi AI-ügynökök</span></h3>
+        <p class="svc-desc"><span class="lang-en">AI agents trained on your data. Live on WhatsApp, Teams, Viber, or email.</span><span class="lang-hu">AI-ügynökök a saját adataitokkal betanítva. Elérhetők WhatsAppon, Teamsben, Viberen vagy emailben.</span></p>
+        <div class="svc-duration"><span class="lang-en">4 weeks to launch + 30 days tuning</span><span class="lang-hu">4 hét az indulásig + 30 nap finomhangolás</span></div>
+        <button class="svc-btn" onclick="openServiceModal('svc-modal-2')"><span class="lang-en">Build My Agent →</span><span class="lang-hu">Építsük meg az ügynökömet →</span></button>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-top">
+          <img class="svc-badge" src="assets/icons/icons-3a-soft-blue/03-strategic-ai-consulting.svg" alt="" width="52" height="52">
+        </div>
+        <h3 class="svc-title"><span class="lang-en">Strategic AI consulting</span><span class="lang-hu">Stratégiai AI-tanácsadás</span></h3>
+        <p class="svc-desc"><span class="lang-en">A clear, prioritized AI roadmap for your business. Not a generic slide deck.</span><span class="lang-hu">Világos, priorizált AI-ütemterv a cégeteknek. Nem sablon prezentáció.</span></p>
+        <div class="svc-duration"><span class="lang-en">2-week roadmap</span><span class="lang-hu">2 hetes ütemterv</span></div>
+        <button class="svc-btn" onclick="openServiceModal('svc-modal-3')"><span class="lang-en">Get My Roadmap →</span><span class="lang-hu">Kérem az ütemtervemet →</span></button>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-top">
+          <img class="svc-badge" src="assets/icons/icons-3a-soft-blue/04-back-office-ai-sprint.svg" alt="" width="52" height="52">
+        </div>
+        <h3 class="svc-title"><span class="lang-en">Back-office AI sprint</span><span class="lang-hu">Back-office AI sprint</span></h3>
+        <p class="svc-desc"><span class="lang-en">We automate the repetitive tasks that slow your team down.</span><span class="lang-hu">Automatizáljuk az ismétlődő feladatokat, amik lassítják a csapatodat.</span></p>
+        <div class="svc-duration"><span class="lang-en">4-6 weeks + 30 days support</span><span class="lang-hu">4-6 hét + 30 nap támogatás</span></div>
+        <button class="svc-btn" onclick="openServiceModal('svc-modal-4')"><span class="lang-en">Automate My Back Office →</span><span class="lang-hu">Automatizáljuk a back office-t →</span></button>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-top">
+          <img class="svc-badge" src="assets/icons/icons-3a-soft-blue/05-documents-and-invoices-ai.svg" alt="" width="52" height="52">
+        </div>
+        <h3 class="svc-title"><span class="lang-en">Documents &amp; invoices AI</span><span class="lang-hu">Dokumentum- és számla-AI</span></h3>
+        <p class="svc-desc"><span class="lang-en">Automatic reading and validation of invoices and documents. Ready for NAV.</span><span class="lang-hu">Számlák és dokumentumok automatikus feldolgozása. NAV-kompatibilis.</span></p>
+        <div class="svc-duration"><span class="lang-en">3-5 weeks + 30 days support</span><span class="lang-hu">3-5 hét + 30 nap támogatás</span></div>
+        <button class="svc-btn" onclick="openServiceModal('svc-modal-5')"><span class="lang-en">Kill Manual Data Entry →</span><span class="lang-hu">Vessünk véget a kézi adatbevitelnek →</span></button>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-top">
+          <img class="svc-badge" src="assets/icons/icons-3a-soft-blue/06-financial-copilot.svg" alt="" width="52" height="52">
+        </div>
+        <h3 class="svc-title"><span class="lang-en">Financial copilot</span><span class="lang-hu">Pénzügyi copilot</span></h3>
+        <p class="svc-desc"><span class="lang-en">Automated collections tracking and cash-flow reports. Always up to date.</span><span class="lang-hu">Automatizált követeléskezelés és cash flow riportok. Mindig naprakész.</span></p>
+        <div class="svc-duration"><span class="lang-en">Monthly retainer</span><span class="lang-hu">Havi előfizetés</span></div>
+        <button class="svc-btn" onclick="openServiceModal('svc-modal-6')"><span class="lang-en">Get My Copilot →</span><span class="lang-hu">Kérem a copilotomat →</span></button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="how-we-work" class="snap-section" style="border-top:1px solid var(--border); background:rgba(3,3,3,0.55); padding-top:72px; padding-bottom:140px;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="lang-en">How we work</span><span class="lang-hu">Hogyan dolgozunk</span></div>
+      <h2><span class="lang-en">Four Steps. Real Results.</span><span class="lang-hu">Négy lépés. Valódi eredmény.</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-orb">01</div>
+        <div class="step-connector"></div>
+        <div class="step-title"><span class="lang-en">Discovery call</span><span class="lang-hu">Feltáró beszélgetés</span></div>
+        <div class="step-desc"><span class="lang-en">We learn about your real problem. No templates.</span><span class="lang-hu">Megismerjük a valós problémát. Nincsenek sablonok.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-orb">02</div>
+        <div class="step-connector"></div>
+        <div class="step-title"><span class="lang-en">Design</span><span class="lang-hu">Tervezés</span></div>
+        <div class="step-desc"><span class="lang-en">We plan the exact process for your data and tools.</span><span class="lang-hu">Megtervezzük a pontos folyamatot az adataitokra és eszközeitekre szabva.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-orb">03</div>
+        <div class="step-connector"></div>
+        <div class="step-title"><span class="lang-en">Delivery</span><span class="lang-hu">Átadás</span></div>
+        <div class="step-desc"><span class="lang-en">Live in 4-6 weeks. Tested with real data before launch.</span><span class="lang-hu">4-6 héten belül élesben. Valós adatokkal tesztelve indulás előtt.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-orb">04</div>
+        <div class="step-title"><span class="lang-en">Follow-up</span><span class="lang-hu">Utókövetés</span></div>
+        <div class="step-desc"><span class="lang-en">30 days of support after launch. Included.</span><span class="lang-hu">Indulás után 30 nap támogatás. Ez benne van az árban.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="snap-section" style="position:relative; overflow:hidden;">
+  <div class="section-bg wave"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div class="section-head">
+      <div class="eyebrow"><span class="lang-en">About</span><span class="lang-hu">Rólunk</span></div>
+      <h2><span class="lang-en">Same approach, new market</span><span class="lang-hu">Ugyanaz a szemlélet, új piac</span></h2>
+    </div>
+    <div class="about-box">
+      <p class="serif"><span class="lang-en">Aidro is an independent AI consultancy in Budapest. We follow the same practical approach as IAhora, our partner company in Latin America. Our agents and automation pay for themselves in weeks — not slide decks about the future of AI.</span><span class="lang-hu">Az Aidro egy független budapesti AI-tanácsadás. Ugyanazt a gyakorlati szemléletet követjük, mint az IAhora, a latin-amerikai partnercégünk. Az ügynökeink és automatizálásunk heteken belül megtérülnek — nem az AI jövőjéről szóló prezentációk.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta snap-section">
+  <div class="wrap">
+    <h2><span class="lang-en">Ready to see this in your business?</span><span class="lang-hu">Készen állsz, hogy ezt lásd a saját cégedben?</span></h2>
+    <a href="#" class="btn-primary" style="padding:14px 28px; font-size:15px;" onclick="openAgentModal('agent-modal-general');return false;"><span class="lang-en">Start My Free AI Diagnostic →</span><span class="lang-hu">Kérem az ingyenes AI-diagnosztikát →</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="logo"><img src="assets/logo/aidro-logo-horizontal.svg" alt="Aidro"></div>
+    <div class="footer-links">
+      <a href="mailto:hello.aidro@gmail.com">hello.aidro@gmail.com</a>
+      <a href="https://www.linkedin.com/company/aidro" target="_blank">LinkedIn</a>
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">TikTok</a>
+      <a href="#" target="_blank">Facebook</a>
+    </div>
+    <div class="copyright">© 2026 Aidro</div>
+  </div>
+</footer>
+
+<!-- ══ SERVICE DETAIL MODALS ══ -->
+
+<div class="service-modal-overlay" id="svc-modal-1">
+  <div class="service-modal">
+    <div class="svc-modal-visual"><img src="assets/images/FomacionIA-service.webp" alt=""></div>
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-01-training.svg" alt=""><span class="lang-en">AI Training</span><span class="lang-hu">AI-képzés</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-1')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">Your Team Learns AI by Doing, Not Watching.</span><span class="lang-hu">A csapatod nem hallgatva, hanem csinálva tanulja meg az AI-t.</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Hands-on workshops built around your business — real tools, real cases, results from day one.</span><span class="lang-hu">Gyakorlati workshopok a vállalkozásodra szabva — valódi eszközök, valódi esetek, eredmény az első naptól.</span></p>
+      <p class="svc-desc"><span class="lang-en">Most AI training teaches what exists, not what your team will actually use. We design every workshop around your real operation — your current processes, your current tools, the problems your people deal with every week. The result isn't a certificate. It's a team that works differently starting Monday.</span><span class="lang-hu">A legtöbb AI-képzés azt tanítja, ami létezik, nem azt, amit a csapatod ténylegesen használni fog. Minden workshopot a valós működésetekre építünk — a jelenlegi folyamataitokra, a már használt eszközeitekre, a problémákra, amikkel a csapatod hetente szembesül. Az eredmény nem egy oklevél. Egy csapat, amely már hétfőn másképp dolgozik.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What's Included</span><span class="lang-hu">Mit tartalmaz</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Upfront assessment of your team's real level and needs</span><span class="lang-hu">A csapat valós szintjének és igényeinek előzetes felmérése</span></li>
+        <li><span class="lang-en">Programs by department: sales, admin, operations, leadership</span><span class="lang-hu">Terület szerinti programok: értékesítés, adminisztráció, üzemeltetés, vezetés</span></li>
+        <li><span class="lang-en">In-person, online, or hybrid — no lost workdays</span><span class="lang-hu">Személyes, online vagy hibrid forma — munkanap kiesés nélkül</span></li>
+        <li><span class="lang-en">Post-training follow-up to make sure it sticks</span><span class="lang-hu">Képzés utáni követés, hogy az eredmény megmaradjon</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Deliverables</span><span class="lang-hu">Amit kapsz</span></span>
+      <ul class="svc-deliverables">
+        <li><span class="lang-en">Initial diagnostic session</span><span class="lang-hu">Kezdeti diagnosztikai ülés</span></li>
+        <li><span class="lang-en">Custom program (schedule + curriculum) by department</span><span class="lang-hu">Egyedi program (ütemterv + tananyag) terület szerint</span></li>
+        <li><span class="lang-en">Digital resource kit: prompts, templates, and workflows applied to your business</span><span class="lang-hu">Digitális anyagcsomag: promptok, sablonok és folyamatok a vállalkozásodra alkalmazva</span></li>
+        <li><span class="lang-en">30-day adoption follow-up report</span><span class="lang-hu">30 napos utánkövetési jelentés</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Quick Facts</span><span class="lang-hu">Gyors áttekintés</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Duration</span><span class="lang-hu">Időtartam</span></span><span class="svc-stat-val"><span class="lang-en">1-day intensive · 4 sessions · 8-week program</span><span class="lang-hu">1 napos intenzív · 4 alkalom · 8 hetes program</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Format</span><span class="lang-hu">Forma</span></span><span class="svc-stat-val"><span class="lang-en">In-person · Online · Hybrid</span><span class="lang-hu">Személyes · Online · Hibrid</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Participants</span><span class="lang-hu">Résztvevők</span></span><span class="svc-stat-val"><span class="lang-en">5 to 40 people per group</span><span class="lang-hu">5-40 fő csoportonként</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Results visible</span><span class="lang-hu">Eredmény látható</span></span><span class="svc-stat-val"><span class="lang-en">From the first session</span><span class="lang-hu">Már az első alkalomtól</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-1');openAgentModal('agent-modal-1')"><span class="lang-en">Train My Team →</span><span class="lang-hu">Képezzük a csapatomat →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-1');openServiceModal('svc-modal-1b')"><span class="lang-en">See available programs</span><span class="lang-hu">Elérhető programok megtekintése</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-2">
+  <div class="service-modal">
+    <div class="svc-modal-visual"><img src="assets/images/Agentes_personalizados_service.webp" alt=""></div>
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-02-agents.svg" alt=""><span class="lang-en">AI Agents</span><span class="lang-hu">AI-ügynökök</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-2')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">A Digital Employee, Trained Only for Your Business.</span><span class="lang-hu">Egy digitális munkatárs, kizárólag a te vállalkozásodra betanítva.</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Not a generic chatbot. An agent that knows your processes, speaks your voice, and works inside your systems — live in 4 weeks.</span><span class="lang-hu">Nem egy általános chatbot. Egy ügynök, aki ismeri a folyamataitokat, a ti hangotokon beszél, és a rendszereitekben dolgozik — 4 hét alatt élesben.</span></p>
+      <p class="svc-desc"><span class="lang-en">Generic assistants give generic answers. A custom Aidro agent works like another member of your team: it knows your catalog, understands your policies, follows your workflows, and connects to the tools you already use. We design the use case, build the agent, integrate it, and stay until it works. Ready to operate from week four.</span><span class="lang-hu">Az általános asszisztensek általános válaszokat adnak. Egy egyedi Aidro-ügynök úgy dolgozik, mint egy plusz csapattag: ismeri a kínálatotokat, érti a szabályaitokat, követi a folyamataitokat, és kapcsolódik a már használt eszközeitekhez. Megtervezzük a use case-t, megépítjük az ügynököt, integráljuk, és addig maradunk, amíg működik. A negyedik héttől üzemkész.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What's Included</span><span class="lang-hu">Mit tartalmaz</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Use-case and conversation flow designed from scratch</span><span class="lang-hu">Use case és beszélgetési folyamat tervezése a nulláról</span></li>
+        <li><span class="lang-en">Integration with your tools: Teams, email, WhatsApp, Viber, CRM</span><span class="lang-hu">Integráció az eszközeitekkel: Teams, email, WhatsApp, Viber, CRM</span></li>
+        <li><span class="lang-en">Trained on your real data: products, prices, policies, FAQs</span><span class="lang-hu">Betanítás a valós adataitokkal: termékek, árak, szabályzatok, GYIK</span></li>
+        <li><span class="lang-en">30 days of post-launch support for tuning and improvement</span><span class="lang-hu">30 nap támogatás indulás után finomhangolásra</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Deliverables</span><span class="lang-hu">Amit kapsz</span></span>
+      <ul class="svc-deliverables">
+        <li><span class="lang-en">Approved use-case and conversation-flow document</span><span class="lang-hu">Jóváhagyott use case és beszélgetési folyamat dokumentum</span></li>
+        <li><span class="lang-en">Live agent on your defined channel(s)</span><span class="lang-hu">Élő ügynök a meghatározott csatorná(k)on</span></li>
+        <li><span class="lang-en">Documented, editable knowledge base</span><span class="lang-hu">Dokumentált, szerkeszthető tudásbázis</span></li>
+        <li><span class="lang-en">Basic metrics dashboard</span><span class="lang-hu">Alap metrika dashboard</span></li>
+        <li><span class="lang-en">30-day tuning report</span><span class="lang-hu">30 napos finomhangolási jelentés</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Quick Facts</span><span class="lang-hu">Gyors áttekintés</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Time to first agent</span><span class="lang-hu">Első ügynökig</span></span><span class="svc-stat-val"><span class="lang-en">4 weeks</span><span class="lang-hu">4 hét</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Channels</span><span class="lang-hu">Csatornák</span></span><span class="svc-stat-val">Teams · Email · WhatsApp · Viber · Web</span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Common cases</span><span class="lang-hu">Gyakori esetek</span></span><span class="svc-stat-val"><span class="lang-en">Customer support · Internal helpdesk · Sales assistant</span><span class="lang-hu">Ügyfélszolgálat · Belső support · Értékesítési asszisztens</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Maintenance</span><span class="lang-hu">Fenntartás</span></span><span class="svc-stat-val"><span class="lang-en">Available as a monthly retainer</span><span class="lang-hu">Havi előfizetésként elérhető</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-2');openAgentModal('agent-modal-2')"><span class="lang-en">Build My Agent →</span><span class="lang-hu">Építsük meg az ügynökömet →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-2');openServiceModal('svc-modal-2b')"><span class="lang-en">See agent examples</span><span class="lang-hu">Ügynök példák megtekintése</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-3">
+  <div class="service-modal">
+    <div class="svc-modal-visual"><img src="assets/images/IA_consulting_service.webp" alt=""></div>
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-03-consulting.svg" alt=""><span class="lang-en">AI Consulting</span><span class="lang-hu">AI-tanácsadás</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-3')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">A Roadmap You Can Actually Execute — Not a Slide Deck.</span><span class="lang-hu">Egy ütemterv, amit tényleg végre tudsz hajtani — nem egy prezentáció.</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">We map your processes, prioritize what to automate first, and hand you a plan with real ROI — in 2 weeks.</span><span class="lang-hu">Feltérképezzük a folyamataitokat, priorizáljuk, mit érdemes elsőként automatizálni, és egy valódi megtérüléssel bíró tervet adunk — 2 hét alatt.</span></p>
+      <p class="svc-desc"><span class="lang-en">Most AI strategy work ends in a presentation nobody opens again. We start by mapping your real processes and data maturity, find where the friction actually is, and prioritize use cases by impact and feasibility. What you get is a roadmap you can start executing the same week — not a vision for 2030.</span><span class="lang-hu">A legtöbb AI-stratégiai munka egy olyan prezentációban végződik, amit soha többé nem nyit meg senki. Mi a valós folyamatok és az adatérettség feltérképezésével kezdünk, megtaláljuk, hol van ténylegesen a súrlódás, és hatás és megvalósíthatóság szerint priorizáljuk a use case-eket. Egy ütemtervet kapsz, amit már ugyanazon a héten elkezdhetsz végrehajtani — nem egy 2030-as víziót.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What's Included</span><span class="lang-hu">Mit tartalmaz</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Process, data maturity, and friction-point diagnostic</span><span class="lang-hu">Folyamat-, adatérettség- és súrlódáspont-diagnosztika</span></li>
+        <li><span class="lang-en">Use-case map with estimated impact and feasibility</span><span class="lang-hu">Use case térkép becsült hatással és megvalósíthatósággal</span></li>
+        <li><span class="lang-en">Adoption roadmap prioritized by ROI and complexity</span><span class="lang-hu">ROI és komplexitás szerint priorizált bevezetési ütemterv</span></li>
+        <li><span class="lang-en">Optional Fractional AI Lead support to execute the plan</span><span class="lang-hu">Opcionális Fractional AI Lead támogatás a terv végrehajtásához</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Deliverables</span><span class="lang-hu">Amit kapsz</span></span>
+      <ul class="svc-deliverables">
+        <li><span class="lang-en">Operational diagnostic report (process map + findings)</span><span class="lang-hu">Működési diagnosztikai jelentés (folyamattérkép + megállapítások)</span></li>
+        <li><span class="lang-en">Prioritized AI use-case inventory (impact, feasibility, estimated ROI)</span><span class="lang-hu">Priorizált AI use case lista (hatás, megvalósíthatóság, becsült ROI)</span></li>
+        <li><span class="lang-en">3/6/12-month adoption roadmap (executive document)</span><span class="lang-hu">3/6/12 hónapos bevezetési ütemterv (vezetői dokumentum)</span></li>
+        <li><span class="lang-en">Presentation session with leadership</span><span class="lang-hu">Bemutató ülés a vezetéssel</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Quick Facts</span><span class="lang-hu">Gyors áttekintés</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Duration</span><span class="lang-hu">Időtartam</span></span><span class="svc-stat-val"><span class="lang-en">2 weeks to roadmap delivery</span><span class="lang-hu">2 hét az ütemterv átadásáig</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Output</span><span class="lang-hu">Eredmény</span></span><span class="svc-stat-val"><span class="lang-en">Executive-ready document</span><span class="lang-hu">Vezetői szintű dokumentum</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Best for</span><span class="lang-hu">Kinek ajánlott</span></span><span class="svc-stat-val"><span class="lang-en">Leadership teams ready to prioritize</span><span class="lang-hu">Priorizálásra kész vezetői csapatok</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Extension</span><span class="lang-hu">Bővítés</span></span><span class="svc-stat-val"><span class="lang-en">Fractional AI Lead available</span><span class="lang-hu">Fractional AI Lead elérhető</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-3');openAgentModal('agent-modal-3')"><span class="lang-en">Get My Roadmap →</span><span class="lang-hu">Kérem az ütemtervemet →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-3');openServiceModal('svc-modal-3b')"><span class="lang-en">What is a Fractional AI Lead?</span><span class="lang-hu">Mi az a Fractional AI Lead?</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-4">
+  <div class="service-modal">
+    <div class="svc-modal-visual"><img src="assets/images/Sprint_backoffice_service.webp" alt=""></div>
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-04-sprint.svg" alt=""><span class="lang-en">Back-Office Sprint</span><span class="lang-hu">Back-office sprint</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-4')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">The Repetitive Work Disappears. The Results Don't.</span><span class="lang-hu">Az ismétlődő munka eltűnik. Az eredmény marad.</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">We connect your tools and automate the tasks eating your team's time — live in 4-6 weeks.</span><span class="lang-hu">Összekötjük az eszközeiteket, és automatizáljuk azokat a feladatokat, amik a csapatod idejét emésztik — 4-6 hét alatt élesben.</span></p>
+      <p class="svc-desc"><span class="lang-en">Every business has manual tasks nobody enjoys and everybody accepts as normal. We connect your ERP, CRM, email, and spreadsheets, automate the repetitive data entry, validations, and follow-ups, and measure the result in hours saved and errors removed — not vague promises.</span><span class="lang-hu">Minden vállalkozásnak vannak kézi feladatai, amiket senki nem élvez, de mindenki normálisnak fogad el. Összekötjük az ERP-t, CRM-et, emailt és a táblázatokat, automatizáljuk az ismétlődő adatbevitelt, validációkat és követéseket, és az eredményt megtakarított órákban és megszüntetett hibákban mérjük — nem homályos ígéretekben.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What's Included</span><span class="lang-hu">Mit tartalmaz</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Connects ERP, CRM, email, Teams, WhatsApp Business, forms, and spreadsheets</span><span class="lang-hu">Összeköti az ERP-t, CRM-et, emailt, Teamst, WhatsApp Businesst, űrlapokat és táblázatokat</span></li>
+        <li><span class="lang-en">Automates data entry, validations, and recurring follow-ups</span><span class="lang-hu">Automatizálja az adatbevitelt, validációkat és ismétlődő követéseket</span></li>
+        <li><span class="lang-en">Measurable ROI: hours saved, errors removed, capacity freed</span><span class="lang-hu">Mérhető megtérülés: megtakarított órák, megszüntetett hibák</span></li>
+        <li><span class="lang-en">Continued support available after the sprint</span><span class="lang-hu">Sprint után folyamatos támogatás elérhető</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Deliverables</span><span class="lang-hu">Amit kapsz</span></span>
+      <ul class="svc-deliverables">
+        <li><span class="lang-en">Documented process map (flow diagram)</span><span class="lang-hu">Dokumentált folyamattérkép (folyamatábra)</span></li>
+        <li><span class="lang-en">Live workflows in production</span><span class="lang-hu">Élő, éles folyamatok</span></li>
+        <li><span class="lang-en">Basic operating manual per workflow</span><span class="lang-hu">Alap üzemeltetési kézikönyv folyamatonként</span></li>
+        <li><span class="lang-en">ROI report at close (hours saved, errors removed)</span><span class="lang-hu">ROI jelentés a zárásnál (megtakarított órák, megszüntetett hibák)</span></li>
+        <li><span class="lang-en">30-day tuning report</span><span class="lang-hu">30 napos finomhangolási jelentés</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Quick Facts</span><span class="lang-hu">Gyors áttekintés</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Duration</span><span class="lang-hu">Időtartam</span></span><span class="svc-stat-val"><span class="lang-en">4-6 weeks + 30 days support</span><span class="lang-hu">4-6 hét + 30 nap támogatás</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Tools</span><span class="lang-hu">Eszközök</span></span><span class="svc-stat-val">Számlázz.hu · Billingo · Kulcs-Soft · RLB-60 · Teams</span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Best for</span><span class="lang-hu">Kinek ajánlott</span></span><span class="svc-stat-val"><span class="lang-en">Repetitive back-office tasks</span><span class="lang-hu">Ismétlődő back-office feladatok</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Measured in</span><span class="lang-hu">Mérve</span></span><span class="svc-stat-val"><span class="lang-en">Hours saved, errors removed</span><span class="lang-hu">Megtakarított órák, megszüntetett hibák</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-4');openAgentModal('agent-modal-4')"><span class="lang-en">Automate My Back Office →</span><span class="lang-hu">Automatizáljuk a back office-t →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-4');openServiceModal('svc-modal-4b')"><span class="lang-en">What tasks can I eliminate?</span><span class="lang-hu">Milyen feladatokat küszöbölhetek ki?</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-5">
+  <div class="service-modal">
+    <div class="svc-modal-visual"><img src="assets/images/Invoicesanddocuments_service.webp" alt=""></div>
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-05-documents.svg" alt=""><span class="lang-en">Documents AI</span><span class="lang-hu">Dokumentum-AI</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-5')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">Stop Typing Invoices by Hand.</span><span class="lang-hu">Ne gépeld be kézzel a számlákat.</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Automatic reading and validation of your documents, NAV-ready — with a human-review safety net.</span><span class="lang-hu">A dokumentumaid automatikus beolvasása és ellenőrzése, NAV-kompatibilis módon — emberi felülvizsgálati háló mellett.</span></p>
+      <p class="svc-desc"><span class="lang-en">Reading and re-typing invoices by hand is slow and error-prone. We build a pipeline that reads your invoices, contracts, and forms automatically, validates the data against your own rules, and sends it straight to your ERP or spreadsheet — with a human-review queue for anything that needs a second look. Full traceability, every time.</span><span class="lang-hu">A számlák kézi beolvasása és begépelése lassú és hibalehetőségekkel teli. Egy folyamatot építünk, amely automatikusan beolvassa a számláitokat, szerződéseiteket és űrlapjaitokat, ellenőrzi az adatokat a saját szabályaitok szerint, és közvetlenül az ERP-be vagy táblázatba küldi — emberi felülvizsgálati sorral azoknak az eseteknek, amik egy második pillantást igényelnek. Teljes nyomon követhetőség, minden alkalommal.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What's Included</span><span class="lang-hu">Mit tartalmaz</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Automatic reading of invoices, contracts, delivery notes, and forms</span><span class="lang-hu">Számlák, szerződések, szállítólevelek és űrlapok automatikus beolvasása</span></li>
+        <li><span class="lang-en">Validation against your own business rules</span><span class="lang-hu">Ellenőrzés a saját üzleti szabályaitok szerint</span></li>
+        <li><span class="lang-en">Direct export to ERP, document manager, spreadsheet, or database</span><span class="lang-hu">Közvetlen exportálás ERP-be, dokumentumkezelőbe, táblázatba vagy adatbázisba</span></li>
+        <li><span class="lang-en">Built for NAV Online Számla (XML 3.0 schema)</span><span class="lang-hu">NAV Online Számlára épített (XML 3.0 séma)</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Deliverables</span><span class="lang-hu">Amit kapsz</span></span>
+      <ul class="svc-deliverables">
+        <li><span class="lang-en">Live document-processing pipeline</span><span class="lang-hu">Élő dokumentumfeldolgozási folyamat</span></li>
+        <li><span class="lang-en">Review panel (processed, pending, rejected, exceptions)</span><span class="lang-hu">Felülvizsgálati panel (feldolgozott, függőben, elutasított, kivétel)</span></li>
+        <li><span class="lang-en">Documented, editable validation rules</span><span class="lang-hu">Dokumentált, szerkeszthető validációs szabályok</span></li>
+        <li><span class="lang-en">Operating manual for your admin team</span><span class="lang-hu">Üzemeltetési kézikönyv az adminisztrációs csapatnak</span></li>
+        <li><span class="lang-en">Accuracy report at close</span><span class="lang-hu">Pontossági jelentés a zárásnál</span></li>
+        <li><span class="lang-en">30-day tuning report</span><span class="lang-hu">30 napos finomhangolási jelentés</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Quick Facts</span><span class="lang-hu">Gyors áttekintés</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Duration</span><span class="lang-hu">Időtartam</span></span><span class="svc-stat-val"><span class="lang-en">3-5 weeks + 30 days support</span><span class="lang-hu">3-5 hét + 30 nap támogatás</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Accuracy</span><span class="lang-hu">Pontosság</span></span><span class="svc-stat-val"><span class="lang-en">+95% on structured documents</span><span class="lang-hu">+95% strukturált dokumentumoknál</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Compliance</span><span class="lang-hu">Megfelelés</span></span><span class="svc-stat-val"><span class="lang-en">NAV Online Számla-ready</span><span class="lang-hu">NAV Online Számla-kompatibilis</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Deadline</span><span class="lang-hu">Határidő</span></span><span class="svc-stat-val"><span class="lang-en">Sept 1, 2026 — new receipt-reporting rules</span><span class="lang-hu">2026. szept. 1. — új nyugtaadat-szabályok</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-5');openAgentModal('agent-modal-5')"><span class="lang-en">Kill Manual Data Entry →</span><span class="lang-hu">Vessünk véget a kézi adatbevitelnek →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-5');openServiceModal('svc-modal-5b')"><span class="lang-en">See compatible document types</span><span class="lang-hu">Kompatibilis dokumentumtípusok megtekintése</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-6">
+  <div class="service-modal">
+    <div class="svc-modal-visual"><img src="assets/images/copilot_financiero_service.webp" alt=""></div>
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-06-financial.svg" alt=""><span class="lang-en">Financial Copilot</span><span class="lang-hu">Pénzügyi copilot</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-6')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">Always Know Where Your Cash Stands.</span><span class="lang-hu">Mindig tudd, hol áll a pénzed.</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Automated collections tracking, bank reconciliation, and cash-flow reports — always up to date.</span><span class="lang-hu">Automatizált követeléskezelés, banki egyeztetés és cash flow riportok — mindig naprakészen.</span></p>
+      <p class="svc-desc"><span class="lang-en">Chasing payments and reconciling bank statements by hand eats hours every month, and the numbers are still out of date by the time you see them. We connect your accounting tool and bank through a licensed EU open-banking provider, automate collections reminders, and reconcile transactions automatically — so your cash-flow report is always current, not last month's guess.</span><span class="lang-hu">A fizetések utáni futkosás és a banki kivonatok kézi egyeztetése minden hónapban órákat visz el, és mire meglátod a számokat, azok már elavultak. Összekötjük a könyvelési rendszereteket és a bankotokat egy uniós licencű open banking szolgáltatón keresztül, automatizáljuk a fizetési emlékeztetőket, és automatikusan egyeztetjük a tranzakciókat — így a cash flow riportotok mindig friss, nem a múlt havi becslés.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What's Included</span><span class="lang-hu">Mit tartalmaz</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Automatic tracking of outstanding invoices, with alerts</span><span class="lang-hu">A nyitott számlák automatikus követése, riasztásokkal</span></li>
+        <li><span class="lang-en">Personalized collections reminders by client, amount, and age</span><span class="lang-hu">Személyre szabott fizetési emlékeztetők ügyfél, összeg és lejárat szerint</span></li>
+        <li><span class="lang-en">Automated bank reconciliation via a licensed EU open-banking provider</span><span class="lang-hu">Automatizált banki egyeztetés uniós licencű open banking szolgáltatón keresztül</span></li>
+        <li><span class="lang-en">Executive cash-flow summaries, ready without manual prep</span><span class="lang-hu">Vezetői cash flow összefoglalók, kézi előkészítés nélkül</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Deliverables</span><span class="lang-hu">Amit kapsz</span></span>
+      <ul class="svc-deliverables">
+        <li><span class="lang-en">Live collections-tracking system</span><span class="lang-hu">Élő követeléskezelési rendszer</span></li>
+        <li><span class="lang-en">Automated collections reminder flows</span><span class="lang-hu">Automatizált fizetési emlékeztető folyamatok</span></li>
+        <li><span class="lang-en">Bank-reconciliation module with a difference report</span><span class="lang-hu">Banki egyeztetési modul eltérés-riporttal</span></li>
+        <li><span class="lang-en">Executive cash-flow and collections dashboard</span><span class="lang-hu">Vezetői cash flow és követeléskezelési dashboard</span></li>
+        <li><span class="lang-en">Alerts configured for leadership</span><span class="lang-hu">Riasztások beállítva a vezetésnek</span></li>
+        <li><span class="lang-en">30-day impact report</span><span class="lang-hu">30 napos hatásjelentés</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Quick Facts</span><span class="lang-hu">Gyors áttekintés</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Duration</span><span class="lang-hu">Időtartam</span></span><span class="svc-stat-val"><span class="lang-en">4-5 weeks + 30 days support</span><span class="lang-hu">4-5 hét + 30 nap támogatás</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Model</span><span class="lang-hu">Modell</span></span><span class="svc-stat-val"><span class="lang-en">Usually a monthly retainer</span><span class="lang-hu">Jellemzően havi előfizetés</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Banks</span><span class="lang-hu">Bankok</span></span><span class="svc-stat-val">OTP · K&amp;H · Erste · Raiffeisen</span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Compliance</span><span class="lang-hu">Megfelelés</span></span><span class="svc-stat-val"><span class="lang-en">Reconciled against NAV Online Számla</span><span class="lang-hu">NAV Online Számlával egyeztetve</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-6');openAgentModal('agent-modal-6')"><span class="lang-en">Get My Copilot →</span><span class="lang-hu">Kérem a copilotomat →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-6');openServiceModal('svc-modal-6b')"><span class="lang-en">How much am I leaving uncollected?</span><span class="lang-hu">Mennyi pénzt hagyok beszedetlenül?</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICE SUB-MODALS (LEVEL 2 — "more info" detail, opened from the secondary link in each main service modal) ══ -->
+
+<div class="service-modal-overlay" id="svc-modal-1b">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-01-training.svg" alt=""><span class="lang-en">Available Programs</span><span class="lang-hu">Elérhető programok</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-1b')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">Programs Available by Area</span><span class="lang-hu">Elérhető programok terület szerint</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Every workshop is custom-built after the initial diagnostic. Here are the most requested topics.</span><span class="lang-hu">Minden workshopot a kezdeti diagnosztika után szabunk testre. Itt vannak a legkeresettebb témák.</span></p>
+      <span class="svc-section-label"><span class="lang-en">Most Requested Topics</span><span class="lang-hu">Legkeresettebb témák</span></span>
+      <ul class="svc-topic-list">
+        <li><span class="svc-topic-title"><span class="lang-en">AI for Sales &amp; Prospecting</span><span class="lang-hu">AI az értékesítésben és lead-generálásban</span></span><span class="svc-topic-desc"><span class="lang-en">Prospect, qualify, and close faster with AI tools.</span><span class="lang-hu">Gyorsabb prospektálás, minősítés és zárás AI-eszközökkel.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">AI for Admin &amp; Back-Office</span><span class="lang-hu">AI az adminisztrációban és back-office-ban</span></span><span class="svc-topic-desc"><span class="lang-en">Automating repetitive tasks, data, and documents.</span><span class="lang-hu">Ismétlődő feladatok, adatok és dokumentumok automatizálása.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Generative AI — Practical Fundamentals</span><span class="lang-hu">Generatív AI — Gyakorlati alapok</span></span><span class="svc-topic-desc"><span class="lang-en">How to use ChatGPT, Claude, and Gemini in daily work.</span><span class="lang-hu">Hogyan használd a ChatGPT-t, Claude-ot és Gemini-t a napi munkában.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">AI for Leadership &amp; Strategy</span><span class="lang-hu">AI a vezetésben és stratégiában</span></span><span class="svc-topic-desc"><span class="lang-en">Reading the market, deciding, and delegating with AI as a copilot.</span><span class="lang-hu">Piac olvasása, döntéshozatal és delegálás AI-copilottal.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">AI for Customer Service</span><span class="lang-hu">AI az ügyfélszolgálatban</span></span><span class="svc-topic-desc"><span class="lang-en">Conversational agents, automated replies, frictionless experience.</span><span class="lang-hu">Beszélgető ügynökök, automatikus válaszok, súrlódásmentes élmény.</span></span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">How It Works</span><span class="lang-hu">Hogyan működik</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Initial diagnostic</span><span class="lang-hu">Kezdeti diagnosztika</span></span><span class="svc-stat-val"><span class="lang-en">We assess the team's level before designing the program</span><span class="lang-hu">Felmérjük a csapat szintjét a program megtervezése előtt</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Flexible duration</span><span class="lang-hu">Rugalmas időtartam</span></span><span class="svc-stat-val"><span class="lang-en">1-day intensive · 4 sessions · Extended 8-week program</span><span class="lang-hu">1 napos intenzív · 4 alkalom · 8 hetes kiterjesztett program</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Format</span><span class="lang-hu">Forma</span></span><span class="svc-stat-val"><span class="lang-en">In-person · Online · Hybrid, based on your availability</span><span class="lang-hu">Személyes · Online · Hibrid, az elérhetőségetek szerint</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Don't see your area?</span><span class="lang-hu">Nem találod a területedet?</span></span><span class="svc-stat-val"><span class="lang-en">We build it with you starting from the initial diagnostic</span><span class="lang-hu">Veled együtt építjük fel a kezdeti diagnosztikából kiindulva</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-1b');openAgentModal('agent-modal-1')"><span class="lang-en">Train My Team →</span><span class="lang-hu">Képezzük a csapatomat →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-1b');openServiceModal('svc-modal-1')"><span class="lang-en">Back to service</span><span class="lang-hu">Vissza a szolgáltatáshoz</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-2b">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-02-agents.svg" alt=""><span class="lang-en">Agent Examples</span><span class="lang-hu">Ügynök példák</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-2b')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">Agents Already Working in Businesses Like Yours</span><span class="lang-hu">Ügynökök, amelyek már működnek a tiédhez hasonló vállalkozásokban</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">These aren't demos. They're real use cases, deployed and running in production.</span><span class="lang-hu">Ezek nem demók. Valódi, éles használati esetek.</span></p>
+      <span class="svc-section-label"><span class="lang-en">Most Frequent Use Cases</span><span class="lang-hu">Leggyakoribb használati esetek</span></span>
+      <ul class="svc-topic-list">
+        <li><span class="svc-topic-title"><span class="lang-en">WhatsApp/Viber — Customer Support</span><span class="lang-hu">WhatsApp/Viber — Ügyfélszolgálat</span></span><span class="svc-topic-desc"><span class="lang-en">Responds, qualifies, and escalates to the right person without losing a lead.</span><span class="lang-hu">Válaszol, minősít, és a megfelelő emberhez irányít anélkül, hogy elveszne egy lead.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Sales Assistant</span><span class="lang-hu">Értékesítési asszisztens</span></span><span class="svc-topic-desc"><span class="lang-en">Explains products, quotes, and books meetings autonomously, 24/7.</span><span class="lang-hu">Bemutatja a termékeket, árajánlatot ad és megbeszéléseket foglal önállóan, 0-24.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Internal Support</span><span class="lang-hu">Belső support</span></span><span class="svc-topic-desc"><span class="lang-en">Answers team questions about policies, processes, and tools without interrupting you.</span><span class="lang-hu">Megválaszolja a csapat kérdéseit szabályzatokról, folyamatokról és eszközökről anélkül, hogy megzavarna.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Automatic Onboarding</span><span class="lang-hu">Automatikus onboarding</span></span><span class="svc-topic-desc"><span class="lang-en">Guides new employees or clients through their first steps without manual intervention.</span><span class="lang-hu">Végigvezeti az új munkatársakat vagy ügyfeleket az első lépéseken kézi beavatkozás nélkül.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Lead Qualifier</span><span class="lang-hu">Lead-minősítő</span></span><span class="svc-topic-desc"><span class="lang-en">Filters and scores prospects before they reach sales.</span><span class="lang-hu">Szűri és pontozza a jelölteket, mielőtt eljutnának az értékesítéshez.</span></span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Process Data</span><span class="lang-hu">Folyamat adatai</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Time to first agent</span><span class="lang-hu">Első ügynökig</span></span><span class="svc-stat-val"><span class="lang-en">4 weeks from kickoff to live agent</span><span class="lang-hu">4 hét a kickoff-tól az élesítésig</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Most common channel</span><span class="lang-hu">Leggyakoribb csatorna</span></span><span class="svc-stat-val">Teams · WhatsApp · Viber · Web</span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Who operates it</span><span class="lang-hu">Ki kezeli</span></span><span class="svc-stat-val"><span class="lang-en">Anyone on your team, no technical skills needed</span><span class="lang-hu">Bárki a csapatból, technikai tudás nélkül</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Demo portfolio</span><span class="lang-hu">Demó portfólió</span></span><span class="svc-stat-val"><span class="lang-en">Aidro's NOVA agents are live examples you can try</span><span class="lang-hu">Az Aidro NOVA ügynökei élő, kipróbálható példák</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-2b');openAgentModal('agent-modal-2')"><span class="lang-en">Build My Agent →</span><span class="lang-hu">Építsük meg az ügynökömet →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-2b');openServiceModal('svc-modal-2')"><span class="lang-en">Back to service</span><span class="lang-hu">Vissza a szolgáltatáshoz</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-3b">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-03-consulting.svg" alt=""><span class="lang-en">Fractional AI Lead</span><span class="lang-hu">Fractional AI Lead</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-3b')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">What Is a Fractional AI Lead?</span><span class="lang-hu">Mi az a Fractional AI Lead?</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">A part-time AI lead — the profile with the highest strategic impact at the lowest operating cost.</span><span class="lang-hu">Részmunkaidős AI-vezető — a legnagyobb stratégiai hatású profil a legalacsonyabb üzemeltetési költséggel.</span></p>
+      <p class="svc-desc"><span class="lang-en">A Fractional AI Lead works with your business part-time and flexibly — one, two, or four sessions a month, based on what you need. You don't hire a full-time executive or carry that cost. You get their strategic judgment, technical criteria, and network exactly when you need them, at a fraction of the usual cost.</span><span class="lang-hu">A Fractional AI Lead részmunkaidőben és rugalmasan dolgozik a vállalkozásoddal — havi egy, két vagy négy alkalommal, az igényeid szerint. Nem kell teljes munkaidős vezetőt felvenned, sem viselned ennek költségét. Megkapod a stratégiai szemléletét, szakmai megítélését és kapcsolati hálóját pontosan akkor, amikor szükséged van rá, a szokásos költség töredékéért.</span></p>
+      <span class="svc-section-label"><span class="lang-en">What a Fractional AI Lead Does</span><span class="lang-hu">Mit csinál egy Fractional AI Lead</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">Defines the company's AI strategy and aligns it with business goals</span><span class="lang-hu">Meghatározza a vállalat AI-stratégiáját és összehangolja az üzleti célokkal</span></li>
+        <li><span class="lang-en">Prioritizes the projects with the highest impact and lowest technical risk</span><span class="lang-hu">Priorizálja a legnagyobb hatású és legalacsonyabb technikai kockázatú projekteket</span></li>
+        <li><span class="lang-en">Oversees implementations and protects the investment without in-house IT</span><span class="lang-hu">Felügyeli a megvalósításokat és megvédi a befektetést belső IT nélkül</span></li>
+        <li><span class="lang-en">Trains leadership to make informed decisions about technology and AI</span><span class="lang-hu">Felkészíti a vezetést, hogy megalapozott döntéseket hozzon a technológiáról és az AI-ról</span></li>
+        <li><span class="lang-en">Connects the company to the right vendors, tools, and talent</span><span class="lang-hu">Összeköti a vállalatot a megfelelő beszállítókkal, eszközökkel és szakemberekkel</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">When It Makes Sense</span><span class="lang-hu">Mikor van értelme</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Ideal company</span><span class="lang-hu">Ideális vállalat</span></span><span class="svc-stat-val"><span class="lang-en">SMEs that want an AI strategy without hiring a full team</span><span class="lang-hu">KKV-k, akik AI-stratégiát szeretnének teljes csapat felvétele nélkül</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Cost vs. full-time</span><span class="lang-hu">Költség teljes munkaidőshöz képest</span></span><span class="svc-stat-val"><span class="lang-en">Up to 10x more affordable than a full-time AI lead</span><span class="lang-hu">Akár 10x olcsóbb, mint egy teljes munkaidős AI-vezető</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Format</span><span class="lang-hu">Forma</span></span><span class="svc-stat-val"><span class="lang-en">Biweekly sessions · Ongoing follow-up · Direct access</span><span class="lang-hu">Kéthetente ülések · Folyamatos követés · Közvetlen elérhetőség</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Expected outcome</span><span class="lang-hu">Várt eredmény</span></span><span class="svc-stat-val"><span class="lang-en">A living roadmap, faster decisions, well-prioritized projects</span><span class="lang-hu">Élő ütemterv, gyorsabb döntések, jól priorizált projektek</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-3b');openAgentModal('agent-modal-3')"><span class="lang-en">Get My Roadmap →</span><span class="lang-hu">Kérem az ütemtervemet →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-3b');openServiceModal('svc-modal-3')"><span class="lang-en">Back to service</span><span class="lang-hu">Vissza a szolgáltatáshoz</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-4b">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-04-sprint.svg" alt=""><span class="lang-en">Tasks You Can Eliminate</span><span class="lang-hu">Kiküszöbölhető feladatok</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-4b')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">These Are the Tasks That Disappear First</span><span class="lang-hu">Ezek a feladatok tűnnek el elsőként</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">If any of these happen in your business this week, it's an immediate candidate for automation.</span><span class="lang-hu">Ha bármelyik ezek közül megtörténik a vállalkozásodban ezen a héten, azonnali jelölt az automatizálásra.</span></p>
+      <span class="svc-section-label"><span class="lang-en">Most Common Tasks to Eliminate</span><span class="lang-hu">Leggyakrabban kiküszöbölt feladatok</span></span>
+      <ul class="svc-topic-list">
+        <li><span class="svc-topic-title"><span class="lang-en">Data entry</span><span class="lang-hu">Adatbevitel</span></span><span class="svc-topic-desc"><span class="lang-en">Manual entry into systems, transfers between platforms, spreadsheet updates.</span><span class="lang-hu">Kézi bevitel rendszerekbe, átvitel platformok között, táblázat-frissítés.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Repetitive communication</span><span class="lang-hu">Ismétlődő kommunikáció</span></span><span class="svc-topic-desc"><span class="lang-en">Follow-up emails, confirmations, payment reminders, internal notifications.</span><span class="lang-hu">Követő emailek, visszaigazolások, fizetési emlékeztetők, belső értesítések.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Sales &amp; CRM</span><span class="lang-hu">Értékesítés és CRM</span></span><span class="svc-topic-desc"><span class="lang-en">Updating opportunities, generating quotes, post-meeting follow-up.</span><span class="lang-hu">Lehetőségek frissítése, árajánlatok készítése, megbeszélés utáni követés.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Administration</span><span class="lang-hu">Adminisztráció</span></span><span class="svc-topic-desc"><span class="lang-en">Document validation, recurring reports, period closings and basic reconciliations.</span><span class="lang-hu">Dokumentum-ellenőrzés, ismétlődő riportok, időszakzárások és alap egyeztetések.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Operations</span><span class="lang-hu">Üzemeltetés</span></span><span class="svc-topic-desc"><span class="lang-en">Task assignment, inventory alerts, status notifications to clients.</span><span class="lang-hu">Feladatkiosztás, készletriasztások, státuszértesítések ügyfeleknek.</span></span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">What You Need to Get Started</span><span class="lang-hu">Mire van szükség a kezdéshez</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">No platform change</span><span class="lang-hu">Nincs platformváltás</span></span><span class="svc-stat-val"><span class="lang-en">We work with the tools you already use</span><span class="lang-hu">A már használt eszközeitekkel dolgozunk</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">No IT team needed</span><span class="lang-hu">Nincs szükség IT-csapatra</span></span><span class="svc-stat-val"><span class="lang-en">No in-house technical staff required</span><span class="lang-hu">Nem szükséges belső technikai személyzet</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">First result</span><span class="lang-hu">Első eredmény</span></span><span class="svc-stat-val"><span class="lang-en">ROI visible from the first week of the sprint</span><span class="lang-hu">Látható megtérülés a sprint első hetétől</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Duration</span><span class="lang-hu">Időtartam</span></span><span class="svc-stat-val"><span class="lang-en">4-6 weeks depending on volume and complexity</span><span class="lang-hu">4-6 hét a mennyiségtől és összetettségtől függően</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-4b');openAgentModal('agent-modal-4')"><span class="lang-en">Automate My Back Office →</span><span class="lang-hu">Automatizáljuk a back office-t →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-4b');openServiceModal('svc-modal-4')"><span class="lang-en">Back to service</span><span class="lang-hu">Vissza a szolgáltatáshoz</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-5b">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-05-documents.svg" alt=""><span class="lang-en">Compatible Documents</span><span class="lang-hu">Kompatibilis dokumentumok</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-5b')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">Documents We Already Process Automatically</span><span class="lang-hu">Dokumentumok, amiket már automatikusan feldolgozunk</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Any input format: email, shared folder, scan, or web form.</span><span class="lang-hu">Bármilyen bemeneti formátum: email, megosztott mappa, szkennelés vagy webes űrlap.</span></p>
+      <span class="svc-section-label"><span class="lang-en">Document Types</span><span class="lang-hu">Dokumentumtípusok</span></span>
+      <ul class="svc-topic-list">
+        <li><span class="svc-topic-title"><span class="lang-en">Vendor invoices</span><span class="lang-hu">Beszállítói számlák</span></span><span class="svc-topic-desc"><span class="lang-en">XML (NAV Online Számla), structured PDF, scanned image.</span><span class="lang-hu">XML (NAV Online Számla), strukturált PDF, szkennelt kép.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Credit and debit notes</span><span class="lang-hu">Jóváíró és terhelő értesítők</span></span><span class="svc-topic-desc"><span class="lang-en">Automatic reading and matching against the original invoice.</span><span class="lang-hu">Automatikus beolvasás és egyeztetés az eredeti számlával.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Purchase orders &amp; delivery notes</span><span class="lang-hu">Megrendelések és szállítólevelek</span></span><span class="svc-topic-desc"><span class="lang-en">Extraction of line items, quantities, and references.</span><span class="lang-hu">Tételek, mennyiségek és hivatkozások kinyerése.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Contracts &amp; agreements</span><span class="lang-hu">Szerződések és megállapodások</span></span><span class="svc-topic-desc"><span class="lang-en">Identification of parties, dates, amounts, and key clauses.</span><span class="lang-hu">Felek, dátumok, összegek és kulcsklauzulák azonosítása.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Internal forms &amp; requests</span><span class="lang-hu">Belső űrlapok és kérelmek</span></span><span class="svc-topic-desc"><span class="lang-en">Digitization and transfer to the destination system.</span><span class="lang-hu">Digitalizálás és átvitel a célrendszerbe.</span></span></li>
+        <li><span class="svc-topic-title"><span class="lang-en">Statements &amp; payroll</span><span class="lang-hu">Kimutatások és bérszámfejtés</span></span><span class="svc-topic-desc"><span class="lang-en">Extraction of transactions and totals for reconciliation.</span><span class="lang-hu">Tranzakciók és összegek kinyerése egyeztetéshez.</span></span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Technical Details</span><span class="lang-hu">Technikai adatok</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Extraction accuracy</span><span class="lang-hu">Kinyerési pontosság</span></span><span class="svc-stat-val"><span class="lang-en">+95% on consistently structured documents</span><span class="lang-hu">+95% konzisztensen strukturált dokumentumoknál</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">NAV compliance</span><span class="lang-hu">NAV-megfelelés</span></span><span class="svc-stat-val"><span class="lang-en">Native compatibility with NAV Online Számla XML</span><span class="lang-hu">Natív kompatibilitás a NAV Online Számla XML-lel</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Output formats</span><span class="lang-hu">Kimeneti formátumok</span></span><span class="svc-stat-val">ERP · Excel · Google Sheets · <span class="lang-en">Database</span><span class="lang-hu">Adatbázis</span> · API</span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Languages</span><span class="lang-hu">Nyelvek</span></span><span class="svc-stat-val"><span class="lang-en">Hungarian · English · Bilingual documents</span><span class="lang-hu">Magyar · Angol · Kétnyelvű dokumentumok</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-5b');openAgentModal('agent-modal-5')"><span class="lang-en">Kill Manual Data Entry →</span><span class="lang-hu">Vessünk véget a kézi adatbevitelnek →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-5b');openServiceModal('svc-modal-5')"><span class="lang-en">Back to service</span><span class="lang-hu">Vissza a szolgáltatáshoz</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="svc-modal-6b">
+  <div class="service-modal">
+    <div class="service-modal-header">
+      <div class="svc-modal-badge"><img src="assets/icons/icon-06-financial.svg" alt=""><span class="lang-en">Collections Diagnostic</span><span class="lang-hu">Követeléskezelési diagnosztika</span></div>
+      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-6b')">✕</button>
+    </div>
+    <div class="service-modal-body">
+      <h2 class="svc-headline"><span class="lang-en">The Money You Already Earned But Haven't Collected</span><span class="lang-hu">A pénz, amit már megkerestél, de még nem kaptál meg</span></h2>
+      <p class="svc-subheadline"><span class="lang-en">Overdue receivables are the quietest financial problem for SMEs. Here's the typical diagnostic.</span><span class="lang-hu">A lejárt követelések a KKV-k legcsendesebb pénzügyi problémája. Íme a tipikus diagnózis.</span></p>
+      <span class="svc-section-label"><span class="lang-en">Signs You Need a Copilot</span><span class="lang-hu">Jelek, hogy szükséged van egy Copilotra</span></span>
+      <ul class="svc-bullets">
+        <li><span class="lang-en">You have invoices issued more than 30 days ago with no confirmed payment date</span><span class="lang-hu">Vannak 30 napnál régebben kiállított számláid megerősített fizetési dátum nélkül</span></li>
+        <li><span class="lang-en">Someone on your team spends hours a week calling or writing to collect payments</span><span class="lang-hu">Valaki a csapatodból heti órákat tölt telefonálással vagy írással a beszedésért</span></li>
+        <li><span class="lang-en">You don't know in real time how much is overdue without asking your accountant</span><span class="lang-hu">Nem tudod valós időben, mennyi a lejárt követelés anélkül, hogy megkérdeznéd a könyvelőt</span></li>
+        <li><span class="lang-en">Cash-flow reports arrive days after you needed them to decide</span><span class="lang-hu">A cash flow riportok napokkal azután érkeznek, hogy szükséged lett volna rájuk a döntéshez</span></li>
+        <li><span class="lang-en">Your clients pay late because no one reminds them of the due date in time</span><span class="lang-hu">Az ügyfeleid azért fizetnek későn, mert senki nem emlékezteti őket időben a határidőre</span></li>
+      </ul>
+      <span class="svc-section-label"><span class="lang-en">Market Diagnostic</span><span class="lang-hu">Piaci diagnózis</span></span>
+      <div class="svc-stats-grid">
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Average SME payment delay</span><span class="lang-hu">Átlagos KKV fizetési késés</span></span><span class="svc-stat-val"><span class="lang-en">Often 45-60 days vs. an ideal 30 or fewer</span><span class="lang-hu">Gyakran 45-60 nap a kívánatos 30 vagy kevesebb helyett</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Late invoices</span><span class="lang-hu">Késett számlák</span></span><span class="svc-stat-val"><span class="lang-en">25-40% in businesses without an active collections system</span><span class="lang-hu">25-40% az aktív követeléskezelési rendszer nélküli vállalkozásoknál</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Cost of delay</span><span class="lang-hu">Késés költsége</span></span><span class="svc-stat-val"><span class="lang-en">Real cost of capital lost with every extra week of waiting</span><span class="lang-hu">Valós tőkeköltség-veszteség minden plusz hét várakozással</span></span></div>
+        <div class="svc-stat"><span class="svc-stat-key"><span class="lang-en">Result with Copilot</span><span class="lang-hu">Eredmény Copilottal</span></span><span class="svc-stat-val"><span class="lang-en">30-40% reduction in average collection days within 60 days</span><span class="lang-hu">30-40%-os csökkenés az átlagos beszedési napokban 60 napon belül</span></span></div>
+      </div>
+    </div>
+    <div class="service-modal-footer">
+      <button class="svc-cta-primary" onclick="closeServiceModal('svc-modal-6b');openAgentModal('agent-modal-6')"><span class="lang-en">Get My Copilot →</span><span class="lang-hu">Kérem a copilotomat →</span></button>
+      <button class="svc-more-link" onclick="closeServiceModal('svc-modal-6b');openServiceModal('svc-modal-6')"><span class="lang-en">Back to service</span><span class="lang-hu">Vissza a szolgáltatáshoz</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AGENT (PICKAXE) MODALS ══ -->
+
+<div class="agent-modal-overlay" id="agent-modal-1">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/icons/icon-01-training.svg" alt=""><span class="lang-en">AI Training for Your Team</span><span class="lang-hu">AI-képzés a csapatodnak</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-1')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-5400acb8-11ea-4efa-b24d-c0cdd8a57ada"></div>
+    </div>
+  </div>
+</div>
+
+<div class="agent-modal-overlay" id="agent-modal-2">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/icons/icon-02-agents.svg" alt=""><span class="lang-en">Custom AI Agents</span><span class="lang-hu">Egyedi AI-ügynökök</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-2')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-0f29ec97-1289-4216-9067-2ddd204611ae"></div>
+    </div>
+  </div>
+</div>
+
+<div class="agent-modal-overlay" id="agent-modal-3">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/icons/icon-03-consulting.svg" alt=""><span class="lang-en">Strategic AI Consulting</span><span class="lang-hu">Stratégiai AI-tanácsadás</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-3')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-ae1e106d-24d8-46e6-9308-ea5a58cf27ee"></div>
+    </div>
+  </div>
+</div>
+
+<div class="agent-modal-overlay" id="agent-modal-4">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/icons/icon-04-sprint.svg" alt=""><span class="lang-en">Back-Office AI Sprint</span><span class="lang-hu">Back-office AI sprint</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-4')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-e4210151-ad50-4723-9408-a861d23dc02e"></div>
+    </div>
+  </div>
+</div>
+
+<div class="agent-modal-overlay" id="agent-modal-5">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/icons/icon-05-documents.svg" alt=""><span class="lang-en">Documents &amp; Invoices AI</span><span class="lang-hu">Dokumentum- és számla-AI</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-5')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-462c1492-99da-4fce-8286-a8abe41db877"></div>
+    </div>
+  </div>
+</div>
+
+<div class="agent-modal-overlay" id="agent-modal-6">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/icons/icon-06-financial.svg" alt=""><span class="lang-en">Financial Copilot</span><span class="lang-hu">Pénzügyi copilot</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-6')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-471f6aba-a0a5-4b7d-a631-6b476087674f"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GENERAL DIAGNOSTIC AGENT MODAL (standard/router agent — triggered from nav, hero and final CTA) ══ -->
+<div class="agent-modal-overlay" id="agent-modal-general">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/logo/aidro-favicon.png" alt=""><span class="lang-en">Free AI Diagnostic</span><span class="lang-hu">Ingyenes AI-diagnosztika</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-general')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-68f7ab84-ab41-469f-b0a5-9ac222613217"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function initParallax(sectionId, bgSelector, strength, scale){
+  var s = scale || 1.08;
+  var section = document.getElementById(sectionId);
+  var bg = section ? section.querySelector(bgSelector) : null;
+  if(!section || !bg) return;
+  section.addEventListener('mousemove', function(e){
+    var rect = section.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width - 0.5;
+    var y = (e.clientY - rect.top) / rect.height - 0.5;
+    bg.style.transform = 'scale(' + s + ') translate(' + (-x*strength) + 'px,' + (-y*strength*0.6) + 'px)';
+  });
+  section.addEventListener('mouseleave', function(){
+    bg.style.transform = 'scale(' + s + ') translate(0,0)';
+  });
+}
+initParallax('services', '.section-bg.neural', 22);
+initParallax('about', '.section-bg.wave', 22);
+initParallax('hero', '.hero-bg', 22, 1);
+
+function initRiseEffect(el){
+  if(!el) return;
+  function update(){
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var start = vh;
+    var end = vh * 0.45;
+    var progress = (start - rect.top) / (start - end);
+    progress = Math.max(0, Math.min(1, progress));
+    var lift = (1 - progress) * 46;
+    el.style.transform = 'translateY(' + lift + 'px)';
+    el.style.opacity = String(0.15 + progress * 0.85);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){ update(); ticking = false; });
+      ticking = true;
+    }
+  });
+  window.addEventListener('resize', update);
+  update();
+}
+initRiseEffect(document.querySelector('.final-cta h2'));
+
+function setLang(lang){
+  document.documentElement.setAttribute('data-lang', lang);
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-hu').classList.toggle('active', lang==='hu');
+}
+
+/* ══ SERVICE DETAIL MODAL SYSTEM ══ */
+function openServiceModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeServiceModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.service-modal-overlay').forEach(function(o){
+  o.addEventListener('click', function(e){ if(e.target === this) closeServiceModal(this.id); });
+});
+
+/* ══ AGENT (PICKAXE) MODAL SYSTEM — carga diferida, sin cargar el script hasta la primera apertura ══ */
+window.__pickaxeLoaded = false;
+window.ensurePickaxeLoaded = function(){
+  if(window.__pickaxeLoaded) return;
+  window.__pickaxeLoaded = true;
+  var s = document.createElement('script');
+  s.src = 'https://studio.pickaxe.co/api/embed/bundle.js';
+  s.defer = true;
+  document.head.appendChild(s);
+};
+function openAgentModal(id){
+  if(window.ensurePickaxeLoaded) window.ensurePickaxeLoaded();
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAgentModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.agent-modal-overlay').forEach(function(o){
+  o.addEventListener('click', function(e){ if(e.target === this) closeAgentModal(this.id); });
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.service-modal-overlay.open').forEach(function(m){ closeServiceModal(m.id); });
+    document.querySelectorAll('.agent-modal-overlay.open').forEach(function(m){ closeAgentModal(m.id); });
+  }
+});
+</script>
+
+</body>
+</html>

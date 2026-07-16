@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 380" width="380" height="380" fill="none">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="190" cy="190" r="150" stroke="#141414" stroke-width="1"/>
+  <circle cx="190" cy="190" r="110" stroke="#141414" stroke-width="1"/>
+  <circle cx="190" cy="190" r="70" stroke="#141414" stroke-width="1"/>
+
+  <!-- outer web -->
+  <g stroke="#1c1c1c" stroke-width="1.2">
+    <line x1="190" y1="60" x2="320" y2="190"/>
+    <line x1="320" y1="190" x2="190" y2="320"/>
+    <line x1="190" y1="320" x2="60" y2="190"/>
+    <line x1="60" y1="190" x2="190" y2="60"/>
+  </g>
+
+  <!-- inner mesh -->
+  <g stroke="#0095B6" stroke-width="1.2" opacity="0.55">
+    <line x1="190" y1="60" x2="190" y2="190"/>
+    <line x1="320" y1="190" x2="190" y2="190"/>
+    <line x1="190" y1="320" x2="190" y2="190"/>
+    <line x1="60" y1="190" x2="190" y2="190"/>
+    <line x1="190" y1="120" x2="255" y2="155"/>
+    <line x1="255" y1="155" x2="255" y2="225"/>
+    <line x1="255" y1="225" x2="190" y2="260"/>
+    <line x1="190" y1="260" x2="125" y2="225"/>
+    <line x1="125" y1="225" x2="125" y2="155"/>
+    <line x1="125" y1="155" x2="190" y2="120"/>
+  </g>
+
+  <!-- secondary nodes -->
+  <g fill="#0a0a0a" stroke="#2a2a2a">
+    <circle cx="190" cy="120" r="4"/>
+    <circle cx="255" cy="155" r="4"/>
+    <circle cx="255" cy="225" r="4"/>
+    <circle cx="190" cy="260" r="4"/>
+    <circle cx="125" cy="225" r="4"/>
+    <circle cx="125" cy="155" r="4"/>
+  </g>
+
+  <!-- primary compass nodes -->
+  <g filter="url(#glow)">
+    <circle cx="190" cy="60" r="7" fill="#0095B6"/>
+    <circle cx="320" cy="190" r="7" fill="#0095B6"/>
+    <circle cx="190" cy="320" r="7" fill="#0095B6"/>
+    <circle cx="60" cy="190" r="7" fill="#0095B6"/>
+  </g>
+
+  <!-- center -->
+  <circle cx="190" cy="190" r="13" fill="#0095B6" filter="url(#glow)"/>
+
+  <!-- labels -->
+  <text x="190" y="42" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" fill="#a3a3a3" letter-spacing="0.02em">Piacismerés</text>
+  <text x="338" y="194" text-anchor="start" font-family="Space Grotesk, sans-serif" font-size="13" fill="#a3a3a3" letter-spacing="0.02em">Hatékonyság</text>
+  <text x="190" y="345" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="13" fill="#a3a3a3" letter-spacing="0.02em">Kivitelezés</text>
+  <text x="42" y="194" text-anchor="end" font-family="Space Grotesk, sans-serif" font-size="13" fill="#a3a3a3" letter-spacing="0.02em">Pontosság</text>
+</svg>

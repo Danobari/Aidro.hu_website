@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<svg width="128" height="128" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+  <title>Financial copilot</title>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.28"></stop>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.08"></stop>
+    </linearGradient>
+    <style>
+      @keyframes badgePulse{0%,100%{opacity:.6}50%{opacity:1}}
+      .badge{animation:badgePulse 3s ease-in-out infinite; transform-origin:center;}
+      @keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+      .blink{animation:blink 1.6s ease-in-out infinite;}
+    </style>
+  </defs>
+  <g class="badge">
+    <rect x="0" y="0" width="52" height="52" rx="14" fill="url(#grad)" stroke="rgba(56,189,248,0.4)" stroke-width="1"></rect>
+  </g>
+  <g transform="translate(10,10)">
+
+    <polyline points="4,24 11,18 18,20 26,8" stroke="#eaf6ff" stroke-opacity="0.9" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></polyline>
+    <circle cx="26" cy="8" r="2.3" fill="#38bdf8" class="blink"></circle>
+  </g>
+</svg>
