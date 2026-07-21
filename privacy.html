@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aidro — Privacy Policy</title>
+<meta name="description" content="Aidro Privacy Policy: how we collect, use, and protect your personal data.">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/logo/aidro-favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo/aidro-favicon.png">
+<meta property="og:title" content="Aidro — Privacy Policy">
+<meta property="og:description" content="Aidro Privacy Policy: how we collect, use, and protect your personal data.">
+<meta property="og:image" content="https://aidro.hu/assets/logo/aidro-favicon.png">
+<meta property="og:url" content="https://aidro.hu/privacy.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Aidro — Privacy Policy">
+<meta name="twitter:image" content="https://aidro.hu/assets/logo/aidro-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#000000;
+    --panel:#0a0a0a;
+    --panel-2:#0d0d0d;
+    --border:#1c1c1c;
+    --bondi:#0095B6;
+    --bondi-bright:#38DFFF;
+    --cobalt:#2461FF;
+    --bondi-dark:#04222b;
+    --white:#F5F7FA;
+    --muted:#a3a3a3;
+    --muted-2:#8a8a8a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; color:var(--white); font-family:'Space Grotesk',sans-serif; -webkit-font-smoothing:antialiased; background:#000;}
+  .serif{font-family:'Source Serif 4',serif;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{width:100%; max-width:1320px; margin:0 auto; padding:0 28px; box-sizing:border-box;}
+  html[data-lang="en"] .lang-hu{display:none;}
+  html[data-lang="hu"] .lang-en{display:none;}
+
+  /* nav */
+  nav{position:sticky; top:0; z-index:50; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); border-bottom:1px solid var(--border);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:18px 28px; max-width:1320px; margin:0 auto;}
+  .logo img{height:30px; display:block; filter:drop-shadow(0 0 6px rgba(56,223,255,0.4)); transition:filter 0.25s ease;}
+  .logo:hover img{filter:drop-shadow(0 0 10px rgba(56,223,255,0.85)) drop-shadow(0 0 24px rgba(0,149,182,0.55));}
+  .nav-links{display:flex; gap:28px; font-size:14px; color:#c3c9d6;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .lang-toggle{display:flex; border:1px solid var(--border); border-radius:7px; font-size:12px;}
+  .lang-toggle button{position:relative; background:none; border:none; color:var(--muted); font-family:inherit; padding:6px 10px; cursor:pointer; font-size:12px; transition:box-shadow 0.25s ease;}
+  .lang-toggle button:first-child{border-radius:6px 0 0 6px;}
+  .lang-toggle button:last-child{border-radius:0 6px 6px 0;}
+  .lang-toggle button.active{background:var(--bondi); color:var(--bondi-dark); font-weight:700; z-index:1; box-shadow:0 0 10px rgba(56,223,255,0.7), 0 0 22px rgba(0,149,182,0.5);}
+  .btn-primary{background:linear-gradient(135deg, #4FD8FF 0%, var(--bondi) 75%); color:#F5F7FA; font-weight:700; padding:10px 18px; border-radius:8px; font-size:13px; border:none; cursor:pointer; font-family:inherit; transition:box-shadow 0.2s ease, transform 0.2s ease; box-shadow:0 0 0 1px rgba(79,216,255,0.15);}
+  .btn-primary:hover{box-shadow:0 0 18px rgba(0,149,182,0.65), 0 0 38px rgba(79,216,255,0.35); transform:translateY(-1px);}
+  @media(max-width:800px){ .nav-links{display:none;} }
+
+  /* policy content */
+  .policy-hero{padding:64px 28px 20px;}
+  .policy-hero .eyebrow{font-size:12px; color:var(--bondi); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; font-weight:700;}
+  .policy-hero h1{font-size:clamp(30px,4vw,42px); font-weight:800; letter-spacing:-0.01em; margin:0 0 14px;}
+  .policy-meta{font-size:13px; color:var(--muted-2); margin:0 0 8px;}
+  .policy-body{padding:20px 28px 100px; max-width:760px; margin:0 auto;}
+  .policy-section{margin-bottom:34px;}
+  .policy-section h3{font-size:19px; font-weight:700; margin:0 0 12px; letter-spacing:-0.005em;}
+  .policy-section p{font-size:14.5px; line-height:1.75; color:var(--muted); margin:0 0 12px;}
+  .policy-section ul{margin:0 0 12px; padding-left:20px;}
+  .policy-section li{font-size:14.5px; line-height:1.7; color:var(--muted); margin-bottom:6px;}
+  .policy-section a{color:var(--bondi); text-decoration:underline;}
+
+  /* footer */
+  footer{border-top:1px solid var(--border); padding:32px 28px 0;}
+  .footer-top{max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:24px; padding-bottom:22px;}
+  .footer-col h4{font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted-2); margin:0 0 10px;}
+  .footer-col .logo{margin-bottom:10px;}
+  .footer-col .logo img{height:22px;}
+  .footer-col p{font-size:12.5px; color:var(--muted); line-height:1.5; margin:0; max-width:280px;}
+  .footer-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;}
+  .footer-col ul a, .footer-col a.footer-plain{font-size:12.5px; color:var(--muted); text-decoration:none; transition:color 0.2s ease, text-shadow 0.2s ease; cursor:pointer;}
+  .footer-col ul a:hover, .footer-col a.footer-plain:hover{color:var(--bondi-bright); text-shadow:0 0 10px rgba(56,223,255,0.75), 0 0 22px rgba(0,149,182,0.5);}
+  .footer-social{display:flex; gap:12px; margin-top:8px; flex-wrap:wrap;}
+  .footer-social a{font-size:11.5px; color:var(--muted-2); text-decoration:none; transition:color 0.2s ease, text-shadow 0.2s ease;}
+  .footer-social a:hover{color:var(--bondi-bright); text-shadow:0 0 10px rgba(56,223,255,0.75), 0 0 22px rgba(0,149,182,0.5);}
+  .footer-bottom{max-width:1120px; margin:0 auto; border-top:1px solid var(--border); padding:12px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .footer-bottom-brand{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--white);}
+  .footer-bottom-brand img{height:18px;}
+  .copyright{font-size:12px; color:#5a5a5a;}
+  .footer-bottom-links{display:flex; gap:22px; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted-2);}
+  .footer-bottom-links a{color:inherit; text-decoration:none; cursor:pointer; transition:color 0.2s ease, text-shadow 0.2s ease;}
+  .footer-bottom-links a:hover{color:var(--bondi-bright); text-shadow:0 0 10px rgba(56,223,255,0.75), 0 0 22px rgba(0,149,182,0.5);}
+  @media(max-width:800px){ .footer-top{grid-template-columns:1fr 1fr;} }
+  @media(max-width:520px){ .footer-top{grid-template-columns:1fr;} }
+
+  /* ══ SERVICE / CONTACT / COOKIE MODALS (shared with index.html) ══ */
+  .service-modal-overlay{display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.82); backdrop-filter:blur(3px); align-items:center; justify-content:center; padding:16px;}
+  .service-modal-overlay.open{display:flex;}
+  .service-modal{position:relative; width:min(720px,96vw); max-height:88vh; background:linear-gradient(160deg,#0b0e12 0%,#050505 100%); border:1px solid rgba(0,149,182,0.28); border-radius:18px; overflow:hidden; box-shadow:0 0 80px rgba(0,149,182,0.15), 0 40px 80px rgba(0,0,0,0.65); display:flex; flex-direction:column;}
+  .service-modal::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent, var(--bondi-bright) 30%, var(--bondi) 70%, transparent); z-index:2;}
+  .service-modal-header{display:flex; align-items:center; justify-content:space-between; padding:16px 26px; border-bottom:1px solid rgba(0,149,182,0.14); background:rgba(0,0,0,0.4); flex-shrink:0;}
+  .service-modal-close, .agent-modal-close{width:34px; height:34px; border-radius:50%; border:1px solid rgba(0,149,182,0.25); background:transparent; color:var(--muted); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; flex-shrink:0;}
+  .service-modal-close:hover, .agent-modal-close:hover{border-color:var(--bondi); color:var(--bondi); box-shadow:0 0 12px rgba(0,149,182,0.35);}
+  .service-modal-body{flex:1; overflow-y:auto; padding:26px 26px 0;}
+  .service-modal-body::-webkit-scrollbar{width:4px;}
+  .service-modal-body::-webkit-scrollbar-thumb{background:rgba(0,149,182,0.3); border-radius:2px;}
+  .service-modal-footer{padding:18px 26px; border-top:1px solid rgba(0,149,182,0.14); background:rgba(0,0,0,0.4); flex-shrink:0;}
+  .svc-cta-primary{display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 24px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; border:none; width:100%; font-family:inherit; background:linear-gradient(135deg, #4FD8FF 0%, var(--bondi) 75%); color:#F5F7FA; box-shadow:0 0 0 1px rgba(79,216,255,0.15); transition:box-shadow 0.2s ease, transform 0.2s ease;}
+  .svc-cta-primary:hover{box-shadow:0 0 18px rgba(0,149,182,0.65), 0 0 38px rgba(79,216,255,0.35); transform:translateY(-1px);}
+  @media(max-width:640px){ .service-modal-body{padding:20px 18px 0;} .service-modal-header,.service-modal-footer{padding:14px 18px;} }
+
+  /* ══ CONTACT FORM MODAL ══ */
+  .contact-modal-title{display:flex; align-items:center; gap:9px; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--bondi-bright);}
+  .contact-headline{font-size:clamp(21px,3vw,28px); font-weight:700; line-height:1.2; margin:0 0 10px; letter-spacing:-0.01em;}
+  .contact-sub{font-size:14px; color:var(--bondi); font-weight:600; margin:0 0 24px; line-height:1.5;}
+  .contact-field{margin-bottom:18px;}
+  .contact-field label{display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(0,149,182,0.75); margin-bottom:8px;}
+  .contact-field input, .contact-field textarea{width:100%; box-sizing:border-box; background:rgba(255,255,255,0.03); border:1px solid rgba(0,149,182,0.22); border-radius:8px; padding:12px 14px; font-family:inherit; font-size:14px; color:var(--white); transition:border-color 0.2s ease;}
+  .contact-field input::placeholder, .contact-field textarea::placeholder{color:var(--muted-2);}
+  .contact-field input:focus, .contact-field textarea:focus{outline:none; border-color:var(--bondi);}
+  .contact-field textarea{resize:vertical; min-height:90px;}
+  .contact-consent{display:flex; align-items:flex-start; gap:9px; font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:20px;}
+  .contact-consent input{margin-top:3px; flex-shrink:0;}
+  .contact-consent a{color:var(--bondi); text-decoration:underline;}
+  .contact-note{font-size:11.5px; color:var(--muted-2); text-align:center; margin:12px 0 0;}
+
+  /* ══ COOKIE CONSENT ══ */
+  .cookie-banner{display:none; position:fixed; left:16px; right:16px; bottom:16px; z-index:250; max-width:760px; margin:0 auto; background:linear-gradient(160deg,#0b0e12 0%,#050505 100%); border:1px solid rgba(0,149,182,0.28); border-radius:14px; padding:18px 22px; box-shadow:0 20px 60px rgba(0,0,0,0.55); align-items:center; gap:18px; flex-wrap:wrap;}
+  .cookie-banner.show{display:flex;}
+  .cookie-banner p{font-size:13px; color:var(--muted); line-height:1.5; margin:0; flex:1; min-width:220px;}
+  .cookie-banner a{color:var(--bondi); text-decoration:underline; cursor:pointer;}
+  .cookie-banner-actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .cookie-btn{font-family:inherit; font-size:12.5px; font-weight:700; padding:9px 16px; border-radius:8px; cursor:pointer; white-space:nowrap;}
+  .cookie-btn-accept{background:linear-gradient(135deg, #4FD8FF 0%, var(--bondi) 75%); color:#F5F7FA; border:none;}
+  .cookie-btn-necessary{background:transparent; color:var(--muted); border:1px solid rgba(0,149,182,0.3);}
+  .cookie-btn-settings{background:transparent; color:var(--muted-2); border:none; text-decoration:underline;}
+  .cookie-row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 0; border-bottom:1px solid rgba(0,149,182,0.12);}
+  .cookie-row:last-of-type{border-bottom:none;}
+  .cookie-row-title{font-size:14px; font-weight:700; color:var(--white); margin:0 0 3px;}
+  .cookie-row-desc{font-size:12.5px; color:var(--muted); line-height:1.5; margin:0; max-width:380px;}
+  .cookie-switch{position:relative; width:42px; height:24px; flex-shrink:0;}
+  .cookie-switch input{opacity:0; width:0; height:0;}
+  .cookie-switch-track{position:absolute; inset:0; background:rgba(255,255,255,0.12); border-radius:20px; cursor:pointer; transition:background 0.2s ease;}
+  .cookie-switch-track::before{content:''; position:absolute; width:18px; height:18px; left:3px; top:3px; background:var(--white); border-radius:50%; transition:transform 0.2s ease;}
+  .cookie-switch input:checked + .cookie-switch-track{background:var(--bondi);}
+  .cookie-switch input:checked + .cookie-switch-track::before{transform:translateX(18px);}
+  .cookie-switch input:disabled + .cookie-switch-track{opacity:0.5; cursor:not-allowed;}
+  @media(max-width:640px){ .cookie-banner{flex-direction:column; align-items:stretch;} .cookie-banner-actions{justify-content:flex-end;} }
+
+  /* ══ AGENT (PICKAXE) MODAL ══ */
+  .agent-modal-overlay{display:none; position:fixed; inset:0; z-index:210; background:rgba(0,0,0,0.86); backdrop-filter:blur(3px); align-items:center; justify-content:center; padding:16px;}
+  .agent-modal-overlay.open{display:flex;}
+  .agent-modal{position:relative; width:min(640px,95vw); height:min(600px,85vh); background:#050505; border:1px solid rgba(0,149,182,0.25); border-radius:18px; overflow:hidden; box-shadow:0 0 80px rgba(0,149,182,0.18), 0 40px 80px rgba(0,0,0,0.6); display:flex; flex-direction:column;}
+  .agent-modal-header{display:flex; align-items:center; justify-content:space-between; padding:16px 22px; border-bottom:1px solid rgba(0,149,182,0.14); flex-shrink:0;}
+  .agent-modal-title{font-size:16px; font-weight:700; color:var(--bondi-bright); display:flex; align-items:center; gap:8px;}
+  .agent-modal-title img{height:22px; width:auto;}
+  .agent-modal-consent{padding:9px 20px; font-size:12px; line-height:1.5; color:var(--muted); background:rgba(0,149,182,0.05); border-bottom:1px solid rgba(0,149,182,0.12); text-align:center; flex-shrink:0;}
+  .agent-modal-body{flex:1; overflow:hidden; position:relative; min-height:0; display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;}
+  .agent-modal-body p{font-size:13px; color:var(--muted); line-height:1.6; margin:0;}
+  .agent-modal-body > div[id^="deployment-"]{position:absolute; inset:0; width:100%; height:100%;}
+  .agent-modal-body iframe{position:absolute; inset:0; width:100%; height:100%; border:none; display:block;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><a href="index.html"><img src="assets/logo/aidro-logo-horizontal.svg" alt="Aidro"></a></div>
+    <div class="nav-links">
+      <a href="index.html#services"><span class="lang-en">Services</span><span class="lang-hu">Szolgáltatások</span></a>
+      <a href="index.html#how-we-work"><span class="lang-en">How we work</span><span class="lang-hu">Hogyan dolgozunk</span></a>
+      <a href="index.html#about"><span class="lang-en">About</span><span class="lang-hu">Rólunk</span></a>
+      <a href="#" onclick="openServiceModal('contact-modal');return false;"><span class="lang-en">Contact</span><span class="lang-hu">Kapcsolat</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="btn-hu" onclick="setLang('hu')">HU</button>
+      </div>
+      <a href="#" class="btn-primary" onclick="openAgentModal('agent-modal-general');return false;"><span class="lang-en">Start My Free AI Diagnostic →</span><span class="lang-hu">Kérem az ingyenes AI-diagnosztikát →</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="policy-hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="lang-en">Legal</span><span class="lang-hu">Jogi</span></div>
+    <h1><span class="lang-en">Privacy Policy</span><span class="lang-hu">Adatvédelmi Tájékoztató</span></h1>
+    <p class="policy-meta"><span class="lang-en">Last updated: July 21, 2026</span><span class="lang-hu">Utolsó frissítés: 2026. július 21.</span></p>
+  </div>
+</div>
+
+<div class="policy-body">
+
+  <div class="policy-section">
+    <h3><span class="lang-en">1. Who we are</span><span class="lang-hu">1. Kik vagyunk</span></h3>
+    <p><span class="lang-en">Aidro is an AI consultancy operated as a sole trader (egyéni vállalkozó) based in Budapest, Hungary. Full legal registration details are available on request. For the purposes of data protection law, Aidro is the data controller for the personal data described in this notice.</span><span class="lang-hu">Az Aidro-t egy budapesti székhelyű egyéni vállalkozó üzemelteti. A teljes cégjogi adatok kérésre elérhetők. Az adatvédelmi jogszabályok értelmében az Aidro az adatkezelő a jelen tájékoztatóban leírt személyes adatok tekintetében.</span></p>
+    <p><span class="lang-en">Contact: hello.aidro@gmail.com</span><span class="lang-hu">Elérhetőség: hello.aidro@gmail.com</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">2. What data we collect</span><span class="lang-hu">2. Milyen adatokat gyűjtünk</span></h3>
+    <p><span class="lang-en">We collect personal data in two situations:</span><span class="lang-hu">Személyes adatokat két esetben gyűjtünk:</span></p>
+    <ul>
+      <li><span class="lang-en"><strong>Contact form.</strong> When you use the "Write to Us" form on our website, we collect your name, email address, subject, and message. This is processed through Formspree, our form-handling provider.</span><span class="lang-hu"><strong>Kapcsolatfelvételi űrlap.</strong> Amikor a weboldalunkon található "Írj Nekünk" űrlapot használod, begyűjtjük a neved, e-mail címed, a tárgyat és az üzenetedet. Ezt a Formspree nevű űrlapkezelő szolgáltatónkon keresztül dolgozzuk fel.</span></li>
+      <li><span class="lang-en"><strong>Free AI Diagnostic chat.</strong> When you use our AI diagnostic tool, we collect the information you choose to share in the conversation (for example, your name, contact details, and details about your business). This is processed through Pickaxe (via its infrastructure provider, Composio), and a summary of qualified conversations is stored in an internal CRM spreadsheet (Google Sheets), synced automatically through Make.com.</span><span class="lang-hu"><strong>Ingyenes AI-diagnosztika chat.</strong> Amikor az AI-diagnosztikai eszközünket használod, begyűjtjük azokat az információkat, amelyeket a beszélgetés során megosztasz (például neved, elérhetőséged és a vállalkozásoddal kapcsolatos részletek). Ezt a Pickaxe (a Composio infrastruktúráján keresztül) dolgozza fel, és a releváns beszélgetések összefoglalója egy belső CRM-táblázatban (Google Sheets) kerül tárolásra, amit a Make.com szinkronizál automatikusan.</span></li>
+    </ul>
+    <p><span class="lang-en">We do not currently use analytics or advertising cookies on this website. See Section 7 for details on cookies.</span><span class="lang-hu">Jelenleg nem használunk analitikai vagy hirdetési sütiket ezen a weboldalon. Részletek a 7. pontban.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">3. Why we process your data and legal basis</span><span class="lang-hu">3. Miért kezeljük az adataidat és milyen jogalapon</span></h3>
+    <p><span class="lang-en">We process your data to:</span><span class="lang-hu">Az adataidat az alábbi célokra kezeljük:</span></p>
+    <ul>
+      <li><span class="lang-en">Respond to your inquiries and provide the information or services you request (legal basis: steps taken at your request prior to entering into a contract, or legitimate interest in responding to business inquiries).</span><span class="lang-hu">Válaszadás a megkeresésedre, illetve a kért információ vagy szolgáltatás biztosítása (jogalap: kérésedre tett lépések szerződéskötést megelőzően, illetve jogos érdek az üzleti megkeresésekre való válaszadásban).</span></li>
+      <li><span class="lang-en">Evaluate whether our services are a good fit for your business, and follow up with relevant proposals (legitimate interest).</span><span class="lang-hu">Annak felmérése, hogy szolgáltatásaink illeszkednek-e a vállalkozásodhoz, és releváns ajánlatok küldése (jogos érdek).</span></li>
+      <li><span class="lang-en">Keep basic records of leads and client conversations for our own business organization (legitimate interest).</span><span class="lang-hu">Alapvető nyilvántartás vezetése a leadekről és ügyfélbeszélgetésekről, saját üzleti szervezés céljából (jogos érdek).</span></li>
+    </ul>
+    <p><span class="lang-en">We do not use your data for automated decision-making that produces legal or similarly significant effects on you.</span><span class="lang-hu">Az adataidat nem használjuk olyan automatizált döntéshozatalra, amely jogi vagy hasonlóan jelentős hatással lenne rád.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">4. Who we share your data with</span><span class="lang-hu">4. Kikkel osztjuk meg az adataidat</span></h3>
+    <p><span class="lang-en">We use the following third-party processors to operate our website and services:</span><span class="lang-hu">A weboldalunk és szolgáltatásaink működtetéséhez az alábbi harmadik fél adatfeldolgozókat használjuk:</span></p>
+    <ul>
+      <li>Formspree <span class="lang-en">(contact form submissions)</span><span class="lang-hu">(kapcsolatfelvételi űrlap beküldései)</span></li>
+      <li>Pickaxe / Composio <span class="lang-en">(AI diagnostic chat infrastructure)</span><span class="lang-hu">(AI-diagnosztikai chat infrastruktúra)</span></li>
+      <li>Google Sheets / Make.com <span class="lang-en">(internal CRM and workflow automation)</span><span class="lang-hu">(belső CRM és folyamatautomatizálás)</span></li>
+      <li>Netlify <span class="lang-en">(website hosting)</span><span class="lang-hu">(weboldal tárhely)</span></li>
+    </ul>
+    <p><span class="lang-en">These providers process data on our behalf and are not permitted to use it for their own purposes. We do not sell your data or share it with advertisers.</span><span class="lang-hu">Ezek a szolgáltatók a nevünkben dolgozzák fel az adatokat, és nem jogosultak azokat saját céljaikra felhasználni. Nem adjuk el az adataidat, és nem osztjuk meg azokat hirdetőkkel.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">5. International data transfers</span><span class="lang-hu">5. Nemzetközi adattovábbítás</span></h3>
+    <p><span class="lang-en">Some of the providers listed above may process data outside the European Economic Area (for example, in the United States). Where this happens, we rely on the safeguards those providers offer (such as Standard Contractual Clauses or equivalent frameworks) to ensure your data remains protected.</span><span class="lang-hu">A fent felsorolt szolgáltatók egy része az Európai Gazdasági Térségen kívül (például az Egyesült Államokban) is feldolgozhat adatokat. Ilyen esetekben az adott szolgáltatók által biztosított garanciákra (például általános szerződési feltételekre vagy azzal egyenértékű keretrendszerekre) támaszkodunk, hogy az adataid védettek maradjanak.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">6. How long we keep your data</span><span class="lang-hu">6. Meddig őrizzük az adataidat</span></h3>
+    <p><span class="lang-en">We keep contact form messages and diagnostic conversations for as long as reasonably necessary to respond to you and, if you become a client, for the duration of our business relationship plus any period required by Hungarian tax or accounting law. If we have no ongoing relationship with you, we aim to delete or anonymize inactive lead data within 24 months.</span><span class="lang-hu">A kapcsolatfelvételi üzeneteket és a diagnosztikai beszélgetéseket addig őrizzük, amíg ésszerűen szükséges a válaszadáshoz, illetve, ha ügyfelünkké válsz, az üzleti kapcsolatunk időtartama alatt, plusz a magyar adó- és számviteli jogszabályok által előírt időszakban. Ha nincs velünk fennálló kapcsolatod, törekszünk arra, hogy az inaktív lead-adatokat 24 hónapon belül töröljük vagy anonimizáljuk.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">7. Cookies</span><span class="lang-hu">7. Sütik</span></h3>
+    <p><span class="lang-en">This website currently uses only strictly necessary technical functionality (such as remembering your cookie preference and your language choice) and does not set analytics or advertising cookies. If this changes in the future, we will update this notice and ask for your consent where required. You can manage your cookie preferences at any time using the "Cookie Settings" link in the footer.</span><span class="lang-hu">Ez a weboldal jelenleg csak a feltétlenül szükséges technikai funkciókat használja (például a sütikre vonatkozó preferenciád és a nyelvi választásod megjegyzését), és nem használ analitikai vagy hirdetési sütiket. Ha ez a jövőben változna, frissítjük ezt a tájékoztatót, és ahol szükséges, kikérjük a hozzájárulásodat. A süti-preferenciáidat bármikor módosíthatod a lábléc "Cookie Settings" linkjén keresztül.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">8. Your rights</span><span class="lang-hu">8. A jogaid</span></h3>
+    <p><span class="lang-en">Under the GDPR, you have the right to:</span><span class="lang-hu">A GDPR értelmében jogod van:</span></p>
+    <ul>
+      <li><span class="lang-en">Access the personal data we hold about you.</span><span class="lang-hu">Hozzáférni a rólad tárolt személyes adatokhoz.</span></li>
+      <li><span class="lang-en">Request correction of inaccurate data.</span><span class="lang-hu">Kérni a pontatlan adatok helyesbítését.</span></li>
+      <li><span class="lang-en">Request deletion of your data ("right to be forgotten").</span><span class="lang-hu">Kérni az adataid törlését ("elfeledtetéshez való jog").</span></li>
+      <li><span class="lang-en">Restrict or object to certain processing.</span><span class="lang-hu">Korlátozni vagy tiltakozni bizonyos adatkezelések ellen.</span></li>
+      <li><span class="lang-en">Request a copy of your data in a portable format.</span><span class="lang-hu">Kérni az adataid másolatát hordozható formátumban.</span></li>
+      <li><span class="lang-en">Lodge a complaint with the Hungarian National Authority for Data Protection and Freedom of Information (NAIH), or your local data protection authority.</span><span class="lang-hu">Panaszt tenni a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (NAIH), vagy a saját országod adatvédelmi hatóságánál.</span></li>
+    </ul>
+    <p><span class="lang-en">To exercise any of these rights, contact us at hello.aidro@gmail.com.</span><span class="lang-hu">A fenti jogok gyakorlásához írj nekünk a hello.aidro@gmail.com címre.</span></p>
+  </div>
+
+  <div class="policy-section">
+    <h3><span class="lang-en">9. Changes to this policy</span><span class="lang-hu">9. Változások ebben a tájékoztatóban</span></h3>
+    <p><span class="lang-en">We may update this policy from time to time. The "Last updated" date at the top of this page reflects the most recent version.</span><span class="lang-hu">Ezt a tájékoztatót időről időre frissíthetjük. Az oldal tetején található "Utolsó frissítés" dátum mutatja a legutóbbi verziót.</span></p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <div class="logo"><img src="assets/logo/aidro-logo-horizontal.svg" alt="Aidro"></div>
+      <p><span class="lang-en">Practical AI systems that help your business operate, decide, and grow — live in weeks, not quarters.</span><span class="lang-hu">Gyakorlati AI-rendszerek, amelyek segítenek a vállalkozásodnak működni, dönteni és növekedni — heteken belül élesben, nem negyedévek alatt.</span></p>
+    </div>
+    <div class="footer-col">
+      <h4><span class="lang-en">Services</span><span class="lang-hu">Szolgáltatások</span></h4>
+      <ul>
+        <li><a href="index.html#services"><span class="lang-en">AI training for your team</span><span class="lang-hu">AI-képzés a csapatodnak</span></a></li>
+        <li><a href="index.html#services"><span class="lang-en">Custom AI agents</span><span class="lang-hu">Egyedi AI-ügynökök</span></a></li>
+        <li><a href="index.html#services"><span class="lang-en">Strategic AI consulting</span><span class="lang-hu">Stratégiai AI-tanácsadás</span></a></li>
+        <li><a href="index.html#services"><span class="lang-en">Back-office AI sprint</span><span class="lang-hu">Back-office AI sprint</span></a></li>
+        <li><a href="index.html#services"><span class="lang-en">Documents &amp; invoices AI</span><span class="lang-hu">Dokumentum- és számla-AI</span></a></li>
+        <li><a href="index.html#services"><span class="lang-en">Financial copilot</span><span class="lang-hu">Pénzügyi copilot</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4><span class="lang-en">Company</span><span class="lang-hu">Vállalat</span></h4>
+      <ul>
+        <li><a href="index.html#about"><span class="lang-en">About Us</span><span class="lang-hu">Rólunk</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4><span class="lang-en">Contact</span><span class="lang-hu">Kapcsolat</span></h4>
+      <ul>
+        <li><a onclick="openServiceModal('contact-modal')">hello.aidro@gmail.com</a></li>
+        <li><span class="footer-plain" style="font-size:13.5px; color:var(--muted);">Budapest, Hungary</span></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/aidro" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">TikTok</a>
+        <a href="#" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-brand"><img src="assets/logo/aidro-favicon.png" alt=""><span>Aidro</span></div>
+    <div class="copyright"><span class="lang-en">© 2026 Aidro — All rights reserved.</span><span class="lang-hu">© 2026 Aidro — Minden jog fenntartva.</span></div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html"><span class="lang-en">Privacy Policy</span><span class="lang-hu">Adatvédelem</span></a>
+      <a onclick="openCookieSettings()"><span class="lang-en">Cookie Settings</span><span class="lang-hu">Süti beállítások</span></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ CONTACT FORM MODAL ══ -->
+<div class="service-modal-overlay" id="contact-modal">
+  <div class="service-modal" style="width:min(560px,96vw);">
+    <div class="service-modal-header">
+      <span class="contact-modal-title">✉️ <span class="lang-en">Write to Us</span><span class="lang-hu">Írj Nekünk</span></span>
+      <button class="service-modal-close" onclick="closeServiceModal('contact-modal')">✕</button>
+    </div>
+    <div class="service-modal-body" style="padding-bottom:26px;">
+      <div id="contact-form-wrap">
+        <h3 class="contact-headline"><span class="lang-en">Prefer to write to us directly?</span><span class="lang-hu">Inkább írnál nekünk közvetlenül?</span></h3>
+        <p class="contact-sub"><span class="lang-en">Tell us about your case. We reply in under 24 hours.</span><span class="lang-hu">Meséld el az esetedet. 24 órán belül válaszolunk.</span></p>
+        <form name="contact" method="POST" action="https://formspree.io/f/meeyzzkk" onsubmit="return handleContactSubmit(event)">
+          <div class="contact-field">
+            <label><span class="lang-en">Your Name</span><span class="lang-hu">Neved</span></label>
+            <input type="text" name="name" required placeholder="Ej. María González">
+          </div>
+          <div class="contact-field">
+            <label><span class="lang-en">Your Email</span><span class="lang-hu">E-mail címed</span></label>
+            <input type="email" name="email" required placeholder="email@company.com">
+          </div>
+          <div class="contact-field">
+            <label><span class="lang-en">Subject</span><span class="lang-hu">Tárgy</span></label>
+            <input type="text" name="subject" placeholder="Ej. I'm interested in the AI Agents service">
+          </div>
+          <div class="contact-field">
+            <label><span class="lang-en">Message</span><span class="lang-hu">Üzenet</span></label>
+            <textarea name="message" required placeholder="Tell us what you need or what part of your business you'd like to automate with AI..."></textarea>
+          </div>
+          <label class="contact-consent">
+            <input type="checkbox" required>
+            <span><span class="lang-en">I have read and accept the</span><span class="lang-hu">Elolvastam és elfogadom az</span> <a href="privacy.html"><span class="lang-en">Privacy Notice</span><span class="lang-hu">Adatvédelmi tájékoztatót</span></a>.</span>
+          </label>
+          <button type="submit" class="svc-cta-primary"><span class="lang-en">✉️ Send Message →</span><span class="lang-hu">✉️ Üzenet küldése →</span></button>
+          <p class="contact-note">🔒 <span class="lang-en">Your information is confidential. No spam, no third parties.</span><span class="lang-hu">Az adataid bizalmasak. Nincs spam, nincs harmadik fél.</span></p>
+        </form>
+      </div>
+      <div id="contact-success" style="display:none; text-align:center; padding:16px 0 8px;">
+        <div style="font-size:52px; line-height:1; margin-bottom:18px;">📩</div>
+        <h3 class="contact-headline" style="margin-bottom:12px;"><span class="lang-en">Message Sent!</span><span class="lang-hu">Üzenet Elküldve!</span></h3>
+        <p style="font-size:14.5px; color:var(--muted); line-height:1.6; max-width:400px; margin:0 auto 26px;"><span class="lang-en">We received your message and will get back to you shortly. We typically reply in under 24 hours.</span><span class="lang-hu">Megkaptuk az üzenetedet, és hamarosan válaszolunk. Általában 24 órán belül válaszolunk.</span></p>
+        <button type="button" class="svc-cta-primary" onclick="closeServiceModal('contact-modal')"><span class="lang-en">Close</span><span class="lang-hu">Bezárás</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COOKIE CONSENT ══ -->
+<div class="cookie-banner" id="cookie-banner">
+  <p><span class="lang-en">We use only essential cookies to run this site. Read our <a href="privacy.html">Privacy Policy</a> for details.</span><span class="lang-hu">Csak a weboldal működéséhez szükséges alapvető sütiket használjuk. Részletek az <a href="privacy.html">Adatvédelmi Tájékoztatóban</a>.</span></p>
+  <div class="cookie-banner-actions">
+    <button type="button" class="cookie-btn cookie-btn-settings" onclick="openCookieSettings()"><span class="lang-en">Settings</span><span class="lang-hu">Beállítások</span></button>
+    <button type="button" class="cookie-btn cookie-btn-necessary" onclick="acceptNecessaryOnly()"><span class="lang-en">Necessary Only</span><span class="lang-hu">Csak szükséges</span></button>
+    <button type="button" class="cookie-btn cookie-btn-accept" onclick="acceptAllCookies()"><span class="lang-en">Accept All</span><span class="lang-hu">Összes elfogadása</span></button>
+  </div>
+</div>
+
+<div class="service-modal-overlay" id="cookie-modal">
+  <div class="service-modal" style="width:min(480px,96vw);">
+    <div class="service-modal-header">
+      <span class="contact-modal-title">🍪 <span class="lang-en">Cookie Settings</span><span class="lang-hu">Süti Beállítások</span></span>
+      <button class="service-modal-close" onclick="closeServiceModal('cookie-modal')">✕</button>
+    </div>
+    <div class="service-modal-body" style="padding-bottom:26px;">
+      <p style="font-size:13.5px; color:var(--muted); line-height:1.6; margin:0 0 6px;"><span class="lang-en">Choose which cookies we're allowed to use. You can change this anytime from the footer.</span><span class="lang-hu">Válaszd ki, mely sütiket használhatjuk. Ezt bármikor módosíthatod a lábléc menüjéből.</span></p>
+      <div class="cookie-row">
+        <div>
+          <p class="cookie-row-title"><span class="lang-en">Necessary</span><span class="lang-hu">Szükséges</span></p>
+          <p class="cookie-row-desc"><span class="lang-en">Required for the site to function properly. Always on.</span><span class="lang-hu">A weboldal megfelelő működéséhez szükségesek. Mindig bekapcsolva.</span></p>
+        </div>
+        <label class="cookie-switch"><input type="checkbox" checked disabled><span class="cookie-switch-track"></span></label>
+      </div>
+      <div class="cookie-row">
+        <div>
+          <p class="cookie-row-title"><span class="lang-en">Analytics</span><span class="lang-hu">Analitika</span></p>
+          <p class="cookie-row-desc"><span class="lang-en">Not currently in use on this site. Reserved for future traffic reporting.</span><span class="lang-hu">Jelenleg nem használjuk ezen a weboldalon. Jövőbeli forgalomelemzésre fenntartva.</span></p>
+        </div>
+        <label class="cookie-switch"><input type="checkbox" id="cookie-toggle-analytics"><span class="cookie-switch-track"></span></label>
+      </div>
+      <button type="button" class="svc-cta-primary" style="margin-top:22px;" onclick="saveCookiePreferences()"><span class="lang-en">Save Preferences</span><span class="lang-hu">Beállítások mentése</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AGENT (PICKAXE) MODAL ══ -->
+<div class="agent-modal-overlay" id="agent-modal-general">
+  <div class="agent-modal">
+    <div class="agent-modal-header">
+      <span class="agent-modal-title"><img src="assets/logo/aidro-favicon.png" alt=""><span class="lang-en">Free AI Diagnostic</span><span class="lang-hu">Ingyenes AI-diagnosztika</span></span>
+      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-general')">✕</button>
+    </div>
+    <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
+    <div class="agent-modal-body">
+      <div id="deployment-68f7ab84-ab41-469f-b0a5-9ac222613217"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function setLang(lang){
+  document.documentElement.setAttribute('data-lang', lang);
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-hu').classList.toggle('active', lang==='hu');
+}
+
+/* ══ SERVICE / CONTACT / COOKIE MODAL SYSTEM ══ */
+function openServiceModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeServiceModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.service-modal-overlay').forEach(function(o){
+  o.addEventListener('click', function(e){ if(e.target === this) closeServiceModal(this.id); });
+});
+
+function handleContactSubmit(e){
+  e.preventDefault();
+  var form = e.target;
+  var submitBtn = form.querySelector('button[type="submit"]');
+  if(submitBtn) submitBtn.disabled = true;
+  var data = new FormData(form);
+  fetch(form.action, { method: 'POST', headers: {'Accept':'application/json'}, body: data })
+    .then(function(res){
+      if(res.ok){
+        form.reset();
+        document.getElementById('contact-form-wrap').style.display = 'none';
+        document.getElementById('contact-success').style.display = 'block';
+      } else {
+        throw new Error('Formspree error');
+      }
+    })
+    .catch(function(){
+      alert(document.documentElement.getAttribute('data-lang') === 'hu' ? 'Hiba történt. Kérlek, próbáld újra.' : 'Something went wrong. Please try again.');
+    })
+    .finally(function(){
+      if(submitBtn) submitBtn.disabled = false;
+    });
+  return false;
+}
+function resetContactModal(){
+  document.getElementById('contact-form-wrap').style.display = 'block';
+  document.getElementById('contact-success').style.display = 'none';
+}
+var _origCloseServiceModal = closeServiceModal;
+closeServiceModal = function(id){
+  _origCloseServiceModal(id);
+  if(id === 'contact-modal') setTimeout(resetContactModal, 300);
+};
+
+/* ══ COOKIE CONSENT ══ */
+function getCookiePrefs(){
+  try{ return JSON.parse(localStorage.getItem('aidro-cookie-consent')); }catch(e){ return null; }
+}
+function saveCookiePrefs(prefs){
+  localStorage.setItem('aidro-cookie-consent', JSON.stringify(prefs));
+  document.getElementById('cookie-banner').classList.remove('show');
+}
+function initCookieConsent(){
+  var prefs = getCookiePrefs();
+  if(!prefs){
+    document.getElementById('cookie-banner').classList.add('show');
+  }
+}
+function acceptAllCookies(){
+  saveCookiePrefs({necessary:true, analytics:true});
+}
+function acceptNecessaryOnly(){
+  saveCookiePrefs({necessary:true, analytics:false});
+}
+function openCookieSettings(){
+  var prefs = getCookiePrefs() || {necessary:true, analytics:false};
+  document.getElementById('cookie-toggle-analytics').checked = !!prefs.analytics;
+  openServiceModal('cookie-modal');
+}
+function saveCookiePreferences(){
+  var analytics = document.getElementById('cookie-toggle-analytics').checked;
+  saveCookiePrefs({necessary:true, analytics:analytics});
+  closeServiceModal('cookie-modal');
+}
+initCookieConsent();
+
+/* ══ AGENT (PICKAXE) MODAL SYSTEM — carga diferida ══ */
+window.__pickaxeLoaded = false;
+window.ensurePickaxeLoaded = function(){
+  if(window.__pickaxeLoaded) return;
+  window.__pickaxeLoaded = true;
+  var s = document.createElement('script');
+  s.src = 'https://studio.pickaxe.co/api/embed/bundle.js';
+  s.defer = true;
+  document.head.appendChild(s);
+};
+function openAgentModal(id){
+  if(window.ensurePickaxeLoaded) window.ensurePickaxeLoaded();
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAgentModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.agent-modal-overlay').forEach(function(o){
+  o.addEventListener('click', function(e){ if(e.target === this) closeAgentModal(this.id); });
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.service-modal-overlay.open').forEach(function(m){ closeServiceModal(m.id); });
+    document.querySelectorAll('.agent-modal-overlay.open').forEach(function(m){ closeAgentModal(m.id); });
+  }
+});
+</script>
+
+</body>
+</html>
