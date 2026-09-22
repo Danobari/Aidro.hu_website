@@ -328,7 +328,7 @@
   .cookie-switch input:disabled + .cookie-switch-track{opacity:0.5; cursor:not-allowed;}
   @media(max-width:640px){ .cookie-banner{flex-direction:column; align-items:stretch;} .cookie-banner-actions{justify-content:flex-end;} }
 
-  /* ══ AGENT (PICKAXE) MODAL ══ */
+  /* ══ AGENT (RELEVANCE AI) MODAL ══ */
   .agent-modal-overlay{display:none; position:fixed; inset:0; z-index:210; background:rgba(0,0,0,0.86); backdrop-filter:blur(3px); align-items:center; justify-content:center; padding:16px;}
   .agent-modal-overlay.open{display:flex;}
   .agent-modal{position:relative; width:min(640px,95vw); height:min(600px,85vh); background:#050505; border:1px solid rgba(0,149,182,0.25); border-radius:18px; overflow:hidden; box-shadow:0 0 80px rgba(0,149,182,0.18), 0 40px 80px rgba(0,0,0,0.6); display:flex; flex-direction:column;}
@@ -338,7 +338,6 @@
   .agent-modal-consent{padding:9px 20px; font-size:12px; line-height:1.5; color:var(--muted); background:rgba(0,149,182,0.05); border-bottom:1px solid rgba(0,149,182,0.12); text-align:center; flex-shrink:0;}
   .agent-modal-body{flex:1; overflow:hidden; position:relative; min-height:0; display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;}
   .agent-modal-body p{font-size:13px; color:var(--muted); line-height:1.6; margin:0;}
-  .agent-modal-body > div[id^="deployment-"]{position:absolute; inset:0; width:100%; height:100%;}
   .agent-modal-body iframe{position:absolute; inset:0; width:100%; height:100%; border:none; display:block;}
 </style>
 </head>
@@ -483,25 +482,25 @@
       <h2><span class="lang-en">Four Steps. Real Results.</span><span class="lang-hu">Négy lépés. Valódi eredmény.</span></h2>
     </div>
     <div class="steps">
-      <div class="step" onclick="openServiceModal('step-modal-1')" role="button" tabindex="0" onkeypress="if(event.key==='Enter')openServiceModal('step-modal-1')">
+      <div class="step" onclick="openServiceModal('step-modal-1')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openServiceModal('step-modal-1');}">
         <div class="step-orb">01</div>
         <div class="step-connector"></div>
         <div class="step-title"><span class="lang-en">Discovery call</span><span class="lang-hu">Feltáró beszélgetés</span></div>
         <div class="step-desc"><span class="lang-en">We learn about your real problem. No templates.</span><span class="lang-hu">Megismerjük a valós problémát. Nincsenek sablonok.</span></div>
       </div>
-      <div class="step" onclick="openServiceModal('step-modal-2')" role="button" tabindex="0" onkeypress="if(event.key==='Enter')openServiceModal('step-modal-2')">
+      <div class="step" onclick="openServiceModal('step-modal-2')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openServiceModal('step-modal-2');}">
         <div class="step-orb">02</div>
         <div class="step-connector"></div>
         <div class="step-title"><span class="lang-en">Design</span><span class="lang-hu">Tervezés</span></div>
         <div class="step-desc"><span class="lang-en">We plan the exact process for your data and tools.</span><span class="lang-hu">Megtervezzük a pontos folyamatot az adataitokra és eszközeitekre szabva.</span></div>
       </div>
-      <div class="step" onclick="openServiceModal('step-modal-3')" role="button" tabindex="0" onkeypress="if(event.key==='Enter')openServiceModal('step-modal-3')">
+      <div class="step" onclick="openServiceModal('step-modal-3')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openServiceModal('step-modal-3');}">
         <div class="step-orb">03</div>
         <div class="step-connector"></div>
         <div class="step-title"><span class="lang-en">Delivery</span><span class="lang-hu">Átadás</span></div>
         <div class="step-desc"><span class="lang-en">Live in 4-6 weeks. Tested with real data before launch.</span><span class="lang-hu">4-6 héten belül élesben. Valós adatokkal tesztelve indulás előtt.</span></div>
       </div>
-      <div class="step" onclick="openServiceModal('step-modal-4')" role="button" tabindex="0" onkeypress="if(event.key==='Enter')openServiceModal('step-modal-4')">
+      <div class="step" onclick="openServiceModal('step-modal-4')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openServiceModal('step-modal-4');}">
         <div class="step-orb">04</div>
         <div class="step-title"><span class="lang-en">Follow-up</span><span class="lang-hu">Utókövetés</span></div>
         <div class="step-desc"><span class="lang-en">30 days of support after launch. Included.</span><span class="lang-hu">Indulás után 30 nap támogatás. Ez benne van az árban.</span></div>
@@ -540,24 +539,24 @@
     <div class="footer-col">
       <h4><span class="lang-en">Services</span><span class="lang-hu">Szolgáltatások</span></h4>
       <ul>
-        <li><a onclick="openServiceModal('svc-modal-1')"><span class="lang-en">AI training for your team</span><span class="lang-hu">AI-képzés a csapatodnak</span></a></li>
-        <li><a onclick="openServiceModal('svc-modal-2')"><span class="lang-en">Custom AI agents</span><span class="lang-hu">Egyedi AI-ügynökök</span></a></li>
-        <li><a onclick="openServiceModal('svc-modal-3')"><span class="lang-en">Strategic AI consulting</span><span class="lang-hu">Stratégiai AI-tanácsadás</span></a></li>
-        <li><a onclick="openServiceModal('svc-modal-4')"><span class="lang-en">Back-office AI sprint</span><span class="lang-hu">Back-office AI sprint</span></a></li>
-        <li><a onclick="openServiceModal('svc-modal-5')"><span class="lang-en">Documents &amp; invoices AI</span><span class="lang-hu">Dokumentum- és számla-AI</span></a></li>
-        <li><a onclick="openServiceModal('svc-modal-6')"><span class="lang-en">Financial copilot</span><span class="lang-hu">Pénzügyi copilot</span></a></li>
+        <li><a href="#" onclick="openServiceModal('svc-modal-1');return false;"><span class="lang-en">AI training for your team</span><span class="lang-hu">AI-képzés a csapatodnak</span></a></li>
+        <li><a href="#" onclick="openServiceModal('svc-modal-2');return false;"><span class="lang-en">Custom AI agents</span><span class="lang-hu">Egyedi AI-ügynökök</span></a></li>
+        <li><a href="#" onclick="openServiceModal('svc-modal-3');return false;"><span class="lang-en">Strategic AI consulting</span><span class="lang-hu">Stratégiai AI-tanácsadás</span></a></li>
+        <li><a href="#" onclick="openServiceModal('svc-modal-4');return false;"><span class="lang-en">Back-office AI sprint</span><span class="lang-hu">Back-office AI sprint</span></a></li>
+        <li><a href="#" onclick="openServiceModal('svc-modal-5');return false;"><span class="lang-en">Documents &amp; invoices AI</span><span class="lang-hu">Dokumentum- és számla-AI</span></a></li>
+        <li><a href="#" onclick="openServiceModal('svc-modal-6');return false;"><span class="lang-en">Financial copilot</span><span class="lang-hu">Pénzügyi copilot</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4><span class="lang-en">Company</span><span class="lang-hu">Vállalat</span></h4>
       <ul>
-        <li><a onclick="openServiceModal('about-modal')"><span class="lang-en">About Us</span><span class="lang-hu">Rólunk</span></a></li>
+        <li><a href="#" onclick="openServiceModal('about-modal');return false;"><span class="lang-en">About Us</span><span class="lang-hu">Rólunk</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4><span class="lang-en">Contact</span><span class="lang-hu">Kapcsolat</span></h4>
       <ul>
-        <li><a onclick="openServiceModal('contact-modal')">hello.aidro@gmail.com</a></li>
+        <li><a href="#" onclick="openServiceModal('contact-modal');return false;">hello.aidro@gmail.com</a></li>
         <li><span class="footer-plain" style="font-size:13.5px; color:var(--muted);">Budapest, Hungary</span></li>
       </ul>
       <div class="footer-social">
@@ -573,7 +572,7 @@
     <div class="copyright"><span class="lang-en">© 2026 Aidro — All rights reserved.</span><span class="lang-hu">© 2026 Aidro — Minden jog fenntartva.</span></div>
     <div class="footer-bottom-links">
       <a href="privacy.html"><span class="lang-en">Privacy Policy</span><span class="lang-hu">Adatvédelem</span></a>
-      <a onclick="openCookieSettings()"><span class="lang-en">Cookie Settings</span><span class="lang-hu">Süti beállítások</span></a>
+      <a href="#" onclick="openCookieSettings();return false;"><span class="lang-en">Cookie Settings</span><span class="lang-hu">Süti beállítások</span></a>
     </div>
   </div>
 </footer>
@@ -581,11 +580,11 @@
 <!-- ══ SERVICE DETAIL MODALS ══ -->
 
 <div class="service-modal-overlay" id="svc-modal-1">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/FomacionIA-service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/FomacionIA-service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-01-training.svg" alt=""><span class="lang-en">AI Training</span><span class="lang-hu">AI-képzés</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-1')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-1')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Your Team Learns AI by Doing, Not Watching.</span><span class="lang-hu">A csapatod nem hallgatva, hanem csinálva tanulja meg az AI-t.</span></h2>
@@ -621,11 +620,11 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-2">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/Agentes_personalizados_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/Agentes_personalizados_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-02-agents.svg" alt=""><span class="lang-en">AI Agents</span><span class="lang-hu">AI-ügynökök</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-2')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-2')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">A Digital Employee, Trained Only for Your Business.</span><span class="lang-hu">Egy digitális munkatárs, kizárólag a te vállalkozásodra betanítva.</span></h2>
@@ -662,11 +661,11 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-3">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/IA_consulting_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/IA_consulting_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-03-consulting.svg" alt=""><span class="lang-en">AI Consulting</span><span class="lang-hu">AI-tanácsadás</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-3')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-3')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">A Roadmap You Can Actually Execute — Not a Slide Deck.</span><span class="lang-hu">Egy ütemterv, amit tényleg végre tudsz hajtani — nem egy prezentáció.</span></h2>
@@ -702,11 +701,11 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-4">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/Sprint_backoffice_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/Sprint_backoffice_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-04-sprint.svg" alt=""><span class="lang-en">Back-Office Sprint</span><span class="lang-hu">Back-office sprint</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-4')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-4')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">The Repetitive Work Disappears. The Results Don't.</span><span class="lang-hu">Az ismétlődő munka eltűnik. Az eredmény marad.</span></h2>
@@ -743,11 +742,11 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-5">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/Invoicesanddocuments_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/Invoicesanddocuments_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-05-documents.svg" alt=""><span class="lang-en">Documents AI</span><span class="lang-hu">Dokumentum-AI</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-5')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-5')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Stop Typing Invoices by Hand.</span><span class="lang-hu">Ne gépeld be kézzel a számlákat.</span></h2>
@@ -785,11 +784,11 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-6">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/copilot_financiero_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/copilot_financiero_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-06-financial.svg" alt=""><span class="lang-en">Financial Copilot</span><span class="lang-hu">Pénzügyi copilot</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-6')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-6')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Always Know Where Your Cash Stands.</span><span class="lang-hu">Mindig tudd, hol áll a pénzed.</span></h2>
@@ -829,10 +828,10 @@
 <!-- ══ SERVICE SUB-MODALS (LEVEL 2 — "more info" detail, opened from the secondary link in each main service modal) ══ -->
 
 <div class="service-modal-overlay" id="svc-modal-1b">
-  <div class="service-modal">
+  <div class="service-modal" role="dialog" aria-modal="true">
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-01-training.svg" alt=""><span class="lang-en">Available Programs</span><span class="lang-hu">Elérhető programok</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-1b')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-1b')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Programs Available by Area</span><span class="lang-hu">Elérhető programok terület szerint</span></h2>
@@ -861,10 +860,10 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-2b">
-  <div class="service-modal">
+  <div class="service-modal" role="dialog" aria-modal="true">
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-02-agents.svg" alt=""><span class="lang-en">Agent Examples</span><span class="lang-hu">Ügynök példák</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-2b')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-2b')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Agents Already Working in Businesses Like Yours</span><span class="lang-hu">Ügynökök, amelyek már működnek a tiédhez hasonló vállalkozásokban</span></h2>
@@ -893,10 +892,10 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-3b">
-  <div class="service-modal">
+  <div class="service-modal" role="dialog" aria-modal="true">
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-03-consulting.svg" alt=""><span class="lang-en">Fractional AI Lead</span><span class="lang-hu">Fractional AI Lead</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-3b')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-3b')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">What Is a Fractional AI Lead?</span><span class="lang-hu">Mi az a Fractional AI Lead?</span></h2>
@@ -926,10 +925,10 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-4b">
-  <div class="service-modal">
+  <div class="service-modal" role="dialog" aria-modal="true">
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-04-sprint.svg" alt=""><span class="lang-en">Tasks You Can Eliminate</span><span class="lang-hu">Kiküszöbölhető feladatok</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-4b')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-4b')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">These Are the Tasks That Disappear First</span><span class="lang-hu">Ezek a feladatok tűnnek el elsőként</span></h2>
@@ -958,10 +957,10 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-5b">
-  <div class="service-modal">
+  <div class="service-modal" role="dialog" aria-modal="true">
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-05-documents.svg" alt=""><span class="lang-en">Compatible Documents</span><span class="lang-hu">Kompatibilis dokumentumok</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-5b')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-5b')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Documents We Already Process Automatically</span><span class="lang-hu">Dokumentumok, amiket már automatikusan feldolgozunk</span></h2>
@@ -991,10 +990,10 @@
 </div>
 
 <div class="service-modal-overlay" id="svc-modal-6b">
-  <div class="service-modal">
+  <div class="service-modal" role="dialog" aria-modal="true">
     <div class="service-modal-header">
       <div class="svc-modal-badge"><img src="assets/icons/icon-06-financial.svg" alt=""><span class="lang-en">Collections Diagnostic</span><span class="lang-hu">Követeléskezelési diagnosztika</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('svc-modal-6b')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('svc-modal-6b')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">The Money You Already Earned But Haven't Collected</span><span class="lang-hu">A pénz, amit már megkerestél, de még nem kaptál meg</span></h2>
@@ -1025,11 +1024,11 @@
 <!-- ══ "HOW WE WORK" STEP MODALS (opened by clicking any of the 4 process steps) ══ -->
 
 <div class="service-modal-overlay" id="step-modal-1">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/FomacionIA-service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/FomacionIA-service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><span class="lang-en">Step 01 · Discovery Call</span><span class="lang-hu">1. lépés · Feltáró beszélgetés</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('step-modal-1')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('step-modal-1')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">We Start By Listening, Not Selling.</span><span class="lang-hu">Először meghallgatunk, nem eladunk.</span></h2>
@@ -1063,11 +1062,11 @@
 </div>
 
 <div class="service-modal-overlay" id="step-modal-2">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/Agentes_personalizados_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/Agentes_personalizados_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><span class="lang-en">Step 02 · Design</span><span class="lang-hu">2. lépés · Tervezés</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('step-modal-2')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('step-modal-2')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">We Design Around Your Data, Not a Template.</span><span class="lang-hu">A ti adataitokra tervezünk, nem egy sablonra.</span></h2>
@@ -1101,11 +1100,11 @@
 </div>
 
 <div class="service-modal-overlay" id="step-modal-3">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/IA_consulting_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/IA_consulting_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><span class="lang-en">Step 03 · Delivery</span><span class="lang-hu">3. lépés · Átadás</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('step-modal-3')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('step-modal-3')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">Live in 4-6 Weeks. Tested on Real Data First.</span><span class="lang-hu">Élesben 4-6 héten belül. Előtte valós adatokkal tesztelve.</span></h2>
@@ -1139,11 +1138,11 @@
 </div>
 
 <div class="service-modal-overlay" id="step-modal-4">
-  <div class="service-modal">
-    <div class="svc-modal-visual"><img src="assets/images/Invoicesanddocuments_service.webp" alt=""></div>
+  <div class="service-modal" role="dialog" aria-modal="true">
+    <div class="svc-modal-visual"><img src="assets/images/Invoicesanddocuments_service.webp" alt="" loading="lazy"></div>
     <div class="service-modal-header">
       <div class="svc-modal-badge"><span class="lang-en">Step 04 · Follow-up</span><span class="lang-hu">4. lépés · Utókövetés</span></div>
-      <button class="service-modal-close" onclick="closeServiceModal('step-modal-4')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('step-modal-4')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">We Don't Disappear After Launch.</span><span class="lang-hu">Indulás után sem tűnünk el.</span></h2>
@@ -1178,10 +1177,10 @@
 
 <!-- ══ CONTACT FORM MODAL ══ -->
 <div class="service-modal-overlay" id="contact-modal">
-  <div class="service-modal" style="width:min(560px,96vw);">
+  <div class="service-modal" role="dialog" aria-modal="true" style="width:min(560px,96vw);">
     <div class="service-modal-header">
       <span class="contact-modal-title">✉️ <span class="lang-en">Write to Us</span><span class="lang-hu">Írj Nekünk</span></span>
-      <button class="service-modal-close" onclick="closeServiceModal('contact-modal')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('contact-modal')">✕</button>
     </div>
     <div class="service-modal-body" style="padding-bottom:26px;">
       <div id="contact-form-wrap">
@@ -1189,20 +1188,20 @@
         <p class="contact-sub"><span class="lang-en">Tell us about your case. We reply in under 24 hours.</span><span class="lang-hu">Meséld el az esetedet. 24 órán belül válaszolunk.</span></p>
         <form name="contact" method="POST" action="https://formspree.io/f/meeyzzkk" onsubmit="return handleContactSubmit(event)">
           <div class="contact-field">
-            <label><span class="lang-en">Your Name</span><span class="lang-hu">Neved</span></label>
-            <input type="text" name="name" required placeholder="Ej. Szabó Benedek">
+            <label for="contact-name"><span class="lang-en">Your Name</span><span class="lang-hu">Neved</span></label>
+            <input id="contact-name" type="text" name="name" required placeholder="Ej. Szabó Benedek">
           </div>
           <div class="contact-field">
-            <label><span class="lang-en">Your Email</span><span class="lang-hu">E-mail címed</span></label>
-            <input type="email" name="email" required placeholder="email@company.com">
+            <label for="contact-email"><span class="lang-en">Your Email</span><span class="lang-hu">E-mail címed</span></label>
+            <input id="contact-email" type="email" name="email" required placeholder="email@company.com">
           </div>
           <div class="contact-field">
-            <label><span class="lang-en">Subject</span><span class="lang-hu">Tárgy</span></label>
-            <input type="text" name="subject" placeholder="Ej. I'm interested in the AI Agents service">
+            <label for="contact-subject"><span class="lang-en">Subject</span><span class="lang-hu">Tárgy</span></label>
+            <input id="contact-subject" type="text" name="subject" placeholder="Ej. I'm interested in the AI Agents service">
           </div>
           <div class="contact-field">
-            <label><span class="lang-en">Message</span><span class="lang-hu">Üzenet</span></label>
-            <textarea name="message" required placeholder="Tell us what you need or what part of your business you'd like to automate with AI..."></textarea>
+            <label for="contact-message"><span class="lang-en">Message</span><span class="lang-hu">Üzenet</span></label>
+            <textarea id="contact-message" name="message" required placeholder="Tell us what you need or what part of your business you'd like to automate with AI..."></textarea>
           </div>
           <label class="contact-consent">
             <input type="checkbox" required>
@@ -1224,10 +1223,10 @@
 
 <!-- ══ ABOUT US MODAL ══ -->
 <div class="service-modal-overlay" id="about-modal">
-  <div class="service-modal" style="width:min(680px,96vw);">
+  <div class="service-modal" role="dialog" aria-modal="true" style="width:min(680px,96vw);">
     <div class="service-modal-header">
       <span class="contact-modal-title"><img src="assets/logo/aidro-favicon.png" alt="" style="height:20px; width:auto;"> <span class="lang-en">About Aidro</span><span class="lang-hu">Az Aidro-ról</span></span>
-      <button class="service-modal-close" onclick="closeServiceModal('about-modal')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('about-modal')">✕</button>
     </div>
     <div class="service-modal-body">
       <h2 class="svc-headline"><span class="lang-en">AI Doesn't Replace Your Judgment. It Multiplies It.</span><span class="lang-hu">Az AI Nem Helyettesíti a Döntésedet. Megsokszorozza.</span></h2>
@@ -1260,10 +1259,10 @@
 </div>
 
 <div class="service-modal-overlay" id="cookie-modal">
-  <div class="service-modal" style="width:min(480px,96vw);">
+  <div class="service-modal" role="dialog" aria-modal="true" style="width:min(480px,96vw);">
     <div class="service-modal-header">
       <span class="contact-modal-title">🍪 <span class="lang-en">Cookie Settings</span><span class="lang-hu">Süti Beállítások</span></span>
-      <button class="service-modal-close" onclick="closeServiceModal('cookie-modal')">✕</button>
+      <button class="service-modal-close" aria-label="Close" onclick="closeServiceModal('cookie-modal')">✕</button>
     </div>
     <div class="service-modal-body" style="padding-bottom:26px;">
       <p style="font-size:13.5px; color:var(--muted); line-height:1.6; margin:0 0 6px;"><span class="lang-en">Choose which cookies we're allowed to use. You can change this anytime from the footer.</span><span class="lang-hu">Válaszd ki, mely sütiket használhatjuk. Ezt bármikor módosíthatod a lábléc menüjéből.</span></p>
@@ -1286,97 +1285,83 @@
   </div>
 </div>
 
-<!-- ══ AGENT (PICKAXE) MODALS ══ -->
+<!-- ══ AGENT (RELEVANCE AI) MODALS ══ -->
 
 <div class="agent-modal-overlay" id="agent-modal-1">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/icons/icon-01-training.svg" alt=""><span class="lang-en">AI Training for Your Team</span><span class="lang-hu">AI-képzés a csapatodnak</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-1')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-1')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-5400acb8-11ea-4efa-b24d-c0cdd8a57ada"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/4c99cbe3-0fac-4957-a1d5-2fbd8b7ab280/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
 <div class="agent-modal-overlay" id="agent-modal-2">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/icons/icon-02-agents.svg" alt=""><span class="lang-en">Custom AI Agents</span><span class="lang-hu">Egyedi AI-ügynökök</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-2')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-2')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-0f29ec97-1289-4216-9067-2ddd204611ae"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/e7c3ead5-2f7e-4cc1-a2a5-24cb3f2cbec6/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
 <div class="agent-modal-overlay" id="agent-modal-3">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/icons/icon-03-consulting.svg" alt=""><span class="lang-en">Strategic AI Consulting</span><span class="lang-hu">Stratégiai AI-tanácsadás</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-3')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-3')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-ae1e106d-24d8-46e6-9308-ea5a58cf27ee"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/243ae998-6f0f-492a-9f4c-70cc4c469f70/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
 <div class="agent-modal-overlay" id="agent-modal-4">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/icons/icon-04-sprint.svg" alt=""><span class="lang-en">Back-Office AI Sprint</span><span class="lang-hu">Back-office AI sprint</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-4')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-4')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-e4210151-ad50-4723-9408-a861d23dc02e"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/5135a415-4351-46ef-8899-b6e1492bf59a/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
 <div class="agent-modal-overlay" id="agent-modal-5">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/icons/icon-05-documents.svg" alt=""><span class="lang-en">Documents &amp; Invoices AI</span><span class="lang-hu">Dokumentum- és számla-AI</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-5')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-5')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-462c1492-99da-4fce-8286-a8abe41db877"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/55355bd0-6102-4320-9d42-1a4d6863a184/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
 <div class="agent-modal-overlay" id="agent-modal-6">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/icons/icon-06-financial.svg" alt=""><span class="lang-en">Financial Copilot</span><span class="lang-hu">Pénzügyi copilot</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-6')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-6')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-471f6aba-a0a5-4b7d-a631-6b476087674f"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/10f40248-f32f-4cde-963a-d67c90340869/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
 <!-- ══ GENERAL DIAGNOSTIC AGENT MODAL (standard/router agent — triggered from nav, hero and final CTA) ══ -->
 <div class="agent-modal-overlay" id="agent-modal-general">
-  <div class="agent-modal">
+  <div class="agent-modal" role="dialog" aria-modal="true">
     <div class="agent-modal-header">
       <span class="agent-modal-title"><img src="assets/logo/aidro-favicon.png" alt=""><span class="lang-en">Free AI Diagnostic</span><span class="lang-hu">Ingyenes AI-diagnosztika</span></span>
-      <button class="agent-modal-close" onclick="closeAgentModal('agent-modal-general')">✕</button>
+      <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-general')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body">
-      <div id="deployment-68f7ab84-ab41-469f-b0a5-9ac222613217"></div>
-    </div>
+    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/6229139e-ae08-461a-b461-812fe6c60836/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=false&amp;hide_description=false"></div>
   </div>
 </div>
 
@@ -1386,11 +1371,18 @@ function initParallax(sectionId, bgSelector, strength, scale){
   var section = document.getElementById(sectionId);
   var bg = section ? section.querySelector(bgSelector) : null;
   if(!section || !bg) return;
+  var pending = false, lastEvent = null;
   section.addEventListener('mousemove', function(e){
-    var rect = section.getBoundingClientRect();
-    var x = (e.clientX - rect.left) / rect.width - 0.5;
-    var y = (e.clientY - rect.top) / rect.height - 0.5;
-    bg.style.transform = 'scale(' + s + ') translate(' + (-x*strength) + 'px,' + (-y*strength*0.6) + 'px)';
+    lastEvent = e;
+    if(pending) return;
+    pending = true;
+    window.requestAnimationFrame(function(){
+      var rect = section.getBoundingClientRect();
+      var x = (lastEvent.clientX - rect.left) / rect.width - 0.5;
+      var y = (lastEvent.clientY - rect.top) / rect.height - 0.5;
+      bg.style.transform = 'scale(' + s + ') translate(' + (-x*strength) + 'px,' + (-y*strength*0.6) + 'px)';
+      pending = false;
+    });
   });
   section.addEventListener('mouseleave', function(){
     bg.style.transform = 'scale(' + s + ') translate(0,0)';
@@ -1427,18 +1419,43 @@ initRiseEffect(document.querySelector('.final-cta h2'));
 
 function setLang(lang){
   document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
   document.getElementById('btn-en').classList.toggle('active', lang==='en');
   document.getElementById('btn-hu').classList.toggle('active', lang==='hu');
 }
 
+/* ══ MODAL FOCUS MANAGEMENT (shared by service + agent modals) ══ */
+var _lastFocusedBeforeModal = null;
+function focusModalDialog(overlayEl){
+  var dialog = overlayEl.querySelector('.service-modal, .agent-modal');
+  if(!dialog) return;
+  if(!dialog.hasAttribute('tabindex')) dialog.setAttribute('tabindex', '-1');
+  dialog.focus();
+}
+function trapModalFocus(e){
+  if(e.key !== 'Tab') return;
+  var openOverlay = document.querySelector('.service-modal-overlay.open, .agent-modal-overlay.open');
+  if(!openOverlay) return;
+  var focusable = openOverlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])');
+  if(!focusable.length) return;
+  var first = focusable[0], last = focusable[focusable.length - 1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+}
+document.addEventListener('keydown', trapModalFocus);
+
 /* ══ SERVICE DETAIL MODAL SYSTEM ══ */
 function openServiceModal(id){
-  document.getElementById(id).classList.add('open');
+  _lastFocusedBeforeModal = document.activeElement;
+  var overlay = document.getElementById(id);
+  overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  focusModalDialog(overlay);
 }
 function closeServiceModal(id){
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow = '';
+  if(_lastFocusedBeforeModal && typeof _lastFocusedBeforeModal.focus === 'function') _lastFocusedBeforeModal.focus();
 }
 document.querySelectorAll('.service-modal-overlay').forEach(function(o){
   o.addEventListener('click', function(e){ if(e.target === this) closeServiceModal(this.id); });
@@ -1510,23 +1527,28 @@ function saveCookiePreferences(){
 }
 initCookieConsent();
 
-/* ══ AGENT (PICKAXE) MODAL SYSTEM — carga diferida, sin cargar el script hasta la primera apertura ══ */
-window.__pickaxeLoaded = false;
-window.ensurePickaxeLoaded = function(){
-  if(window.__pickaxeLoaded) return;
-  window.__pickaxeLoaded = true;
-  var s = document.createElement('script');
-  s.src = 'https://studio.pickaxe.co/api/embed/bundle.js';
-  s.defer = true;
-  document.head.appendChild(s);
-};
+/* ══ AGENT (RELEVANCE AI) MODAL SYSTEM — el iframe solo se crea la primera vez que se abre cada modal ══ */
+function mountAgentEmbed(overlay){
+  var body = overlay.querySelector('.agent-modal-body');
+  if(!body || body.querySelector('iframe')) return;
+  var src = body.getAttribute('data-src');
+  if(!src) return;
+  var iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.allow = 'microphone';
+  body.appendChild(iframe);
+}
 function openAgentModal(id){
-  if(window.ensurePickaxeLoaded) window.ensurePickaxeLoaded();
-  document.getElementById(id).classList.add('open');
+  var overlay = document.getElementById(id);
+  mountAgentEmbed(overlay);
+  _lastFocusedBeforeModal = document.activeElement;
+  overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  focusModalDialog(overlay);
 }
 function closeAgentModal(id){
   document.getElementById(id).classList.remove('open');
+  if(_lastFocusedBeforeModal && typeof _lastFocusedBeforeModal.focus === 'function') _lastFocusedBeforeModal.focus();
   document.body.style.overflow = '';
 }
 document.querySelectorAll('.agent-modal-overlay').forEach(function(o){
