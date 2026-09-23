@@ -13,7 +13,12 @@ const AGENT_IDS: Record<string, string> = {
   copilot: "10f40248-f32f-4cde-963a-d67c90340869",
 };
 
-type Session = { task: any; agent: any; message?: string; error?: string; done: boolean };
+// Colchón para relojes desalineados entre esta función y el backend de
+// Relevance: al fijar "sentAt" restamos unos segundos para no excluir por
+// error el mensaje que sí acabamos de generar.
+const CLOCK_SKEW_BUFFER_MS = 5000;
+
+type Session = { task: any; agent: any; message?: string; error?: string; done: boolean; sentAt: Date };
 const sessions = new Map<string, Session>();
 
 function env(name: string, fallback = "") {
@@ -50,24 +55,25 @@ function agentIdFor(key: string) {
   return id;
 }
 
-function watchTask(session: Session) {
-  session.task.addEventListener("message", ({ detail }: any) => {
-    const message = detail?.message;
-    // isThought() es poco confiable según la propia documentación del SDK de
-    // Relevance y puede dar falso positivo en una respuesta final real,
-    // haciendo que nos quedemos con un mensaje viejo. Cualquier mensaje de
-    // agente ya completado es definitivo.
-    if (message?.isAgent?.()) {
-      session.message = message.text || "";
+// Busca, entre los mensajes creados después de "sentAt", el más reciente que
+// sea una respuesta ya terminada del agente. No dependemos de eventos del
+// SDK: algunos emisores "reproducen" el historial completo al suscribirse a
+// una tarea, lo que antes hacía que nos quedáramos con la respuesta del
+// turno anterior en vez de esperar la nueva.
+async function pollTask(session: Session) {
+  const messages = await session.task.getMessages({ after: session.sentAt });
+  for (const message of messages.slice().reverse()) {
+    if (message.type === "agent-error") {
+      session.error = message.lastError || "El agente devolvió un error.";
       session.done = true;
-      session.task.unsubscribe?.();
+      return;
     }
-  });
-  session.task.addEventListener("error", ({ detail }: any) => {
-    session.error = detail?.message?.lastError || "El agente devolvió un error.";
-    session.done = true;
-    session.task.unsubscribe?.();
-  });
+    if (message.isAgent?.() && !message.isGenerating?.() && message.text) {
+      session.message = message.text;
+      session.done = true;
+      return;
+    }
+  }
 }
 
 async function taskStatus(req: Request) {
@@ -79,26 +85,14 @@ async function taskStatus(req: Request) {
     getConfig();
     const agent = await Agent.get(agentIdFor(agentKey));
     const task = await agent.getTask(taskId);
-    session = { task, agent, done: false };
+    // No sabemos cuándo se envió el mensaje original (p. ej. la función se
+    // reinició); usamos la última actualización de la tarea como referencia.
+    const sentAt = new Date(task.updatedAt.getTime() - CLOCK_SKEW_BUFFER_MS);
+    session = { task, agent, done: false, sentAt };
     sessions.set(taskId, session);
-    watchTask(session);
   }
   if (!session) return json({ error: "No se encontró la conversación; vuelve a escribir tu mensaje." }, 410);
-  if (!session.done) {
-    const messages = await session.task.getMessages({ after: new Date(0) });
-    for (const message of messages.slice().reverse()) {
-      if (message.type === "agent-error") {
-        session.error = message.lastError || "El agente devolvió un error.";
-        session.done = true;
-        break;
-      }
-      if (message.isAgent?.() && !message.isGenerating?.() && message.text) {
-        session.message = message.text;
-        session.done = true;
-        break;
-      }
-    }
-  }
+  if (!session.done) await pollTask(session);
   if (session.error) return json({ error: session.error }, 500);
   if (!session.done) return json({ pending: true }, 202);
   return json({ taskId: session.task.id, message: session.message || "" });
@@ -110,12 +104,12 @@ async function start(req: Request) {
   const agentKey = String(body.agent || "");
   const message = String(body.message || "").trim().slice(0, 2000);
   if (!message) return json({ error: "Escribe un mensaje." }, 422);
+  const sentAt = new Date(Date.now() - CLOCK_SKEW_BUFFER_MS);
   const agent = await Agent.get(agentIdFor(agentKey));
   const task = await agent.sendMessage(message);
   const taskId = task.id;
-  const session: Session = { task, agent, done: false };
+  const session: Session = { task, agent, done: false, sentAt };
   sessions.set(taskId, session);
-  watchTask(session);
   return json({ taskId, pending: true }, 202);
 }
 
@@ -125,12 +119,13 @@ async function continueSession(req: Request) {
   const agentKey = String(body.agent || "");
   const message = String(body.message || "").trim().slice(0, 2000);
   if (!message) return json({ error: "Escribe un mensaje." }, 422);
+  const sentAt = new Date(Date.now() - CLOCK_SKEW_BUFFER_MS);
   let session = sessions.get(taskId);
   if (!session && taskId) {
     getConfig();
     const agent = await Agent.get(agentIdFor(agentKey));
     const task = await agent.getTask(taskId);
-    session = { task, agent, done: false };
+    session = { task, agent, done: false, sentAt };
     sessions.set(taskId, session);
   }
   if (!session) {
@@ -139,9 +134,7 @@ async function continueSession(req: Request) {
     getConfig();
     const agent = await Agent.get(agentIdFor(agentKey));
     const task = await agent.sendMessage(message);
-    const newSession: Session = { task, agent, done: false };
-    sessions.set(task.id, newSession);
-    watchTask(newSession);
+    sessions.set(task.id, { task, agent, done: false, sentAt });
     return json({ taskId: task.id, pending: true }, 202);
   }
   const task = await session.agent.sendMessage(message, session.task);
@@ -149,8 +142,8 @@ async function continueSession(req: Request) {
   session.message = undefined;
   session.error = undefined;
   session.done = false;
+  session.sentAt = sentAt;
   sessions.set(task.id, session);
-  watchTask(session);
   return json({ taskId: task.id, pending: true }, 202);
 }
 
