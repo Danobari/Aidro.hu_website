@@ -336,9 +336,30 @@
   .agent-modal-title{font-size:16px; font-weight:700; color:var(--bondi-bright); display:flex; align-items:center; gap:8px;}
   .agent-modal-title img{height:22px; width:auto;}
   .agent-modal-consent{padding:9px 20px; font-size:12px; line-height:1.5; color:var(--muted); background:rgba(0,149,182,0.05); border-bottom:1px solid rgba(0,149,182,0.12); text-align:center; flex-shrink:0;}
-  .agent-modal-body{flex:1; overflow:hidden; position:relative; min-height:0; display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;}
-  .agent-modal-body p{font-size:13px; color:var(--muted); line-height:1.6; margin:0;}
-  .agent-modal-body iframe{position:absolute; inset:0; width:100%; height:100%; border:none; display:block;}
+  .agent-modal-body{flex:1; overflow:hidden; position:relative; min-height:0; display:flex; flex-direction:column;}
+
+  /* ══ NOVA CHAT WIDGET (custom, replaces the Relevance AI iframe embed) ══ */
+  .nova-chat{display:flex; flex-direction:column; height:100%; width:100%;}
+  .nova-chat-messages{flex:1; overflow-y:auto; padding:20px 22px; display:flex; flex-direction:column; gap:14px;}
+  .nova-msg{display:flex; gap:10px; align-items:flex-start; max-width:88%;}
+  .nova-msg-user{align-self:flex-end; flex-direction:row-reverse;}
+  .nova-msg-agent{align-self:flex-start;}
+  .nova-avatar{width:26px; height:26px; border-radius:8px; flex-shrink:0; margin-top:2px;}
+  .nova-bubble{font-size:14px; line-height:1.55; padding:10px 14px; border-radius:14px; word-wrap:break-word; white-space:pre-wrap;}
+  .nova-msg-agent .nova-bubble{background:rgba(0,149,182,0.08); border:1px solid rgba(0,149,182,0.3); color:var(--white); border-top-left-radius:4px;}
+  .nova-msg-user .nova-bubble{background:var(--white); color:#0a0a0a; border-top-right-radius:4px;}
+  .nova-typing .nova-bubble{display:flex; align-items:center; gap:4px; padding:12px 14px;}
+  .nova-typing span{display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--bondi); opacity:.35; animation:novaBlink 1s infinite;}
+  .nova-typing span:nth-child(2){animation-delay:.15s;}
+  .nova-typing span:nth-child(3){animation-delay:.3s;}
+  @keyframes novaBlink{0%,80%,100%{opacity:.25;}40%{opacity:1;}}
+  .nova-input-row{display:flex; gap:10px; align-items:center; padding:14px 18px; border-top:1px solid rgba(0,149,182,0.14); flex-shrink:0;}
+  .nova-input{flex:1; background:#0f0f0f; border:1px solid var(--border); border-radius:20px; padding:11px 16px; font-size:14px; color:var(--white); font-family:inherit; outline:none;}
+  .nova-input:focus{border-color:var(--bondi);}
+  .nova-input::placeholder{color:var(--muted-2);}
+  .nova-send-btn{width:38px; height:38px; border-radius:50%; background:var(--bondi); border:none; color:#fff; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:opacity .15s;}
+  .nova-send-btn:hover{opacity:.85;}
+  .nova-send-btn:disabled{opacity:.4; cursor:default;}
 </style>
 </head>
 <body>
@@ -1294,7 +1315,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-1')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/4c99cbe3-0fac-4957-a1d5-2fbd8b7ab280/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="training"></div>
   </div>
 </div>
 
@@ -1305,7 +1326,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-2')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/e7c3ead5-2f7e-4cc1-a2a5-24cb3f2cbec6/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="agents"></div>
   </div>
 </div>
 
@@ -1316,7 +1337,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-3')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/243ae998-6f0f-492a-9f4c-70cc4c469f70/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="consulting"></div>
   </div>
 </div>
 
@@ -1327,7 +1348,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-4')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/5135a415-4351-46ef-8899-b6e1492bf59a/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="sprint"></div>
   </div>
 </div>
 
@@ -1338,7 +1359,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-5')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/55355bd0-6102-4320-9d42-1a4d6863a184/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="documents"></div>
   </div>
 </div>
 
@@ -1349,7 +1370,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-6')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/10f40248-f32f-4cde-963a-d67c90340869/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="copilot"></div>
   </div>
 </div>
 
@@ -1361,7 +1382,7 @@
       <button class="agent-modal-close" aria-label="Close" onclick="closeAgentModal('agent-modal-general')">✕</button>
     </div>
     <div class="agent-modal-consent"><span class="lang-en">By continuing, your conversation with this agent is processed under our Privacy Notice.</span><span class="lang-hu">A folytatással a beszélgetésed ezzel az ügynökkel az Adatvédelmi tájékoztatónk szerint kerül feldolgozásra.</span></div>
-    <div class="agent-modal-body" data-src="https://app.relevanceai.com/agents/bcbe5a/28511a9a-43eb-471c-8753-c7b7ff634074/6229139e-ae08-461a-b461-812fe6c60836/embed-chat?hide_tool_steps=false&amp;hide_file_uploads=false&amp;hide_conversation_list=false&amp;bubble_style=agent&amp;primary_color=%230095B6&amp;bubble_icon=pd%2Fchat&amp;input_placeholder_text=Type+your+message...&amp;hide_logo=true&amp;hide_description=false"></div>
+    <div class="agent-modal-body" data-agent="general"></div>
   </div>
 </div>
 
@@ -1527,20 +1548,133 @@ function saveCookiePreferences(){
 }
 initCookieConsent();
 
-/* ══ AGENT (RELEVANCE AI) MODAL SYSTEM — el iframe solo se crea la primera vez que se abre cada modal ══ */
-function mountAgentEmbed(overlay){
+/* ══ NOVA CHAT SYSTEM — chat propio (Netlify Function + API de Relevance AI), sin iframe de Relevance ══ */
+var NOVA_GREETINGS = {
+  general: {
+    en: "Hi 👋 I'm NOVA, Aidro's AI ambassador. Tell me briefly about your business and I'll point you to the service that fits best.",
+    hu: "Szia 👋 NOVA vagyok, az Aidro AI nagykövete. Mesélj röviden a vállalkozásodról, és megmutatom a hozzá leginkább illő szolgáltatást."
+  },
+  training: {
+    en: "Hi 👋 I'm NOVA. You're looking at AI Training for Your Team — tell me about your team and I'll shape a plan around it.",
+    hu: "Szia 👋 NOVA vagyok. Az AI-képzés a csapatodnak szolgáltatást nézed — mesélj a csapatodról, és ahhoz igazítom a tervet."
+  },
+  agents: {
+    en: "Hi 👋 I'm NOVA. You're looking at Custom AI Agents — tell me what process you'd like to automate and I'll take it from there.",
+    hu: "Szia 👋 NOVA vagyok. Az Egyedi AI-ügynökök szolgáltatást nézed — mondd el, milyen folyamatot automatizálnál, és onnan folytatjuk."
+  },
+  consulting: {
+    en: "Hi 👋 I'm NOVA. You're looking at Strategic AI Consulting — tell me about your business and I'll help map out where AI fits.",
+    hu: "Szia 👋 NOVA vagyok. A Stratégiai AI-tanácsadás szolgáltatást nézed — mesélj a vállalkozásodról, és segítek feltérképezni, hol illeszkedik az AI."
+  },
+  sprint: {
+    en: "Hi 👋 I'm NOVA. You're looking at the Back-Office AI Sprint — tell me which repetitive task slows your team down most.",
+    hu: "Szia 👋 NOVA vagyok. A Back-office AI sprint szolgáltatást nézed — mondd el, melyik ismétlődő feladat lassítja legjobban a csapatodat."
+  },
+  documents: {
+    en: "Hi 👋 I'm NOVA. You're looking at Documents & Invoices AI — tell me what kind of documents you handle and I'll take it from there.",
+    hu: "Szia 👋 NOVA vagyok. A Dokumentum- és számla-AI szolgáltatást nézed — mondd el, milyen dokumentumokkal dolgozol, és onnan folytatjuk."
+  },
+  copilot: {
+    en: "Hi 👋 I'm NOVA. You're looking at the Financial Copilot — tell me a bit about your collections or cash-flow process.",
+    hu: "Szia 👋 NOVA vagyok. A Pénzügyi copilot szolgáltatást nézed — mesélj röviden a beszedési vagy cash-flow folyamatodról."
+  }
+};
+var novaSessions = {};
+function novaLang(){ return document.documentElement.getAttribute('data-lang') === 'hu' ? 'hu' : 'en'; }
+function novaPost(path, body){
+  return fetch('/api/nova' + path, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  }).then(function(r){ return r.json(); });
+}
+function novaAppendMessage(chat, role, text){
+  var list = chat.querySelector('.nova-chat-messages');
+  var row = document.createElement('div');
+  row.className = 'nova-msg nova-msg-' + role;
+  if(role === 'agent'){
+    var avatar = document.createElement('img');
+    avatar.src = 'assets/logo/aidro-favicon.png';
+    avatar.alt = '';
+    avatar.className = 'nova-avatar';
+    row.appendChild(avatar);
+  }
+  var bubble = document.createElement('div');
+  bubble.className = 'nova-bubble';
+  bubble.textContent = text;
+  row.appendChild(bubble);
+  list.appendChild(row);
+  list.scrollTop = list.scrollHeight;
+  return row;
+}
+function novaAppendTyping(chat){
+  var row = novaAppendMessage(chat, 'agent', '');
+  row.classList.add('nova-typing');
+  row.querySelector('.nova-bubble').innerHTML = '<span></span><span></span><span></span>';
+  return row;
+}
+function mountNovaChat(overlay){
   var body = overlay.querySelector('.agent-modal-body');
-  if(!body || body.querySelector('iframe')) return;
-  var src = body.getAttribute('data-src');
-  if(!src) return;
-  var iframe = document.createElement('iframe');
-  iframe.src = src;
-  iframe.allow = 'microphone';
-  body.appendChild(iframe);
+  if(!body || body.querySelector('.nova-chat')) return;
+  var agentKey = body.getAttribute('data-agent');
+  body.innerHTML =
+    '<div class="nova-chat">' +
+      '<div class="nova-chat-messages"></div>' +
+      '<div class="nova-input-row">' +
+        '<input type="text" class="nova-input" maxlength="2000">' +
+        '<button type="button" class="nova-send-btn" aria-label="Send">➤</button>' +
+      '</div>' +
+    '</div>';
+  var chat = body.querySelector('.nova-chat');
+  chat.dataset.agent = agentKey;
+  var input = chat.querySelector('.nova-input');
+  input.placeholder = novaLang() === 'hu' ? 'Írd ide az üzeneted...' : 'Type your message...';
+  var greeting = NOVA_GREETINGS[agentKey];
+  if(greeting) novaAppendMessage(chat, 'agent', greeting[novaLang()]);
+  var sendBtn = chat.querySelector('.nova-send-btn');
+  function doSend(){
+    var text = input.value.trim();
+    if(!text) return;
+    input.value = '';
+    novaSendMessage(chat, agentKey, text);
+  }
+  sendBtn.addEventListener('click', doSend);
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doSend(); } });
+}
+function novaSendMessage(chat, agentKey, text){
+  novaAppendMessage(chat, 'user', text);
+  var typingRow = novaAppendTyping(chat);
+  var session = novaSessions[agentKey] || (novaSessions[agentKey] = {});
+  var sendPromise = session.taskId
+    ? novaPost('/continue', {agent: agentKey, taskId: session.taskId, message: text})
+    : novaPost('', {agent: agentKey, message: text});
+  sendPromise.then(function(data){
+    if(data.error) throw new Error(data.error);
+    session.taskId = data.taskId;
+    return novaPollStatus(chat, agentKey, session, typingRow);
+  }).catch(function(){
+    typingRow.remove();
+    novaAppendMessage(chat, 'agent', novaLang() === 'hu' ? 'Hiba történt. Kérlek, próbáld újra.' : 'Something went wrong. Please try again.');
+  });
+}
+function novaPollStatus(chat, agentKey, session, typingRow, attempt){
+  attempt = attempt || 0;
+  if(attempt >= 30){
+    typingRow.remove();
+    novaAppendMessage(chat, 'agent', novaLang() === 'hu' ? 'Időtúllépés történt. Kérlek, próbáld újra.' : 'Timed out waiting for a response. Please try again.');
+    return;
+  }
+  return novaPost('/status', {agent: agentKey, taskId: session.taskId}).then(function(data){
+    if(data.error){ typingRow.remove(); novaAppendMessage(chat, 'agent', data.error); return; }
+    if(!data.pending){ typingRow.remove(); novaAppendMessage(chat, 'agent', data.message || ''); return; }
+    return new Promise(function(resolve){ setTimeout(resolve, 1200); }).then(function(){
+      return novaPollStatus(chat, agentKey, session, typingRow, attempt + 1);
+    });
+  });
 }
 function openAgentModal(id){
   var overlay = document.getElementById(id);
-  mountAgentEmbed(overlay);
+  mountNovaChat(overlay);
   _lastFocusedBeforeModal = document.activeElement;
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
